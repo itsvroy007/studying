@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        input{
+            padding:8px;
+            font-size: 15px;
+        }
+        body{
+            background-color: rgba(40, 40, 40, 0.806);
+            color: azure;
+        }
+        .timer-start,.timer-pause,.timer-reset{
+            color: azure;
+            background-color: rgb(30, 35, 35);
+            border: none;
+            font-family: Arial;
+            border-radius: 60px;
+            border: solid 2px rgb(255, 255, 255);
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .sw-start,.sw-pause,.sw-reset{
+            color: azure;
+            background-color: rgb(30, 35, 35);
+            border: none;
+            font-family: Arial;
+            border-radius: 60px;
+            border: solid 2px rgb(255, 255, 255);
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .addtime{
+            color: azure;
+            background-color: rgb(30, 35, 35);
+            border: none;
+            font-family: Arial;
+            border-radius: 60px;
+            border: solid 2px rgb(255, 255, 255);
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <h1>Digital Clock</h1>
+        <div class="timer">
+            <h1>Timer</h1>
+            <input type="number" placeholder="Enter min or sec"> <br><br>
+            <div class="timer_display" id="timer_display">Display</div> <br>
+            <button class="timer-start" onclick="timer_start();">Start</button>
+            <button class="timer-pause" onclick="timer_pause();">Pause</button>
+            <button class="timer-reset" onclick="timer_reset();">Reset</button>
+            <br>
+            <h2>Add min in timer</h2>
+            <button class="addtime" onclick="addtime(5)">+1</button>
+            <button class="addtime" onclick="addtime(5)">+5</button>
+            <button class="addtime" onclick="addtime(15)">+15</button>
+            <button class="addtime" onclick="addtime(30)">+30</button>
+        </div>
+        <div class="stopwatch">
+            <h1>StopWatch</h1>
+            <div class="sw-display">Display</div> <br>
+            <button class="sw-start" onclick="sw_start();">Start</button>
+            <button class="sw-pause" onclick="sw_pause();">Pause</button>
+            <button class="sw-reset" onclick="sw_reset();">Reset</button>
+        </div>
+    </div>
+    <script>
+        let time = 0;
+        let intervalId = null;
+        function timer_reset(){
+            document.querySelector('.timer-display').innerText = 0;
+        }
+        function reset(){
+            document.querySelector('.sw-display').innerText = 0;
+        }
+
+        function updateDisplay(value){
+            document.querySelector('.display').innerText = value;
+        }
+    </script>  
+</body>
+</html>

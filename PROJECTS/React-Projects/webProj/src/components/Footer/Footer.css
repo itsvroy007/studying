@@ -1,0 +1,18 @@
+.footer{
+  background-color: white;
+}
+
+.logoimg{
+  width: 120px;
+  height: 100px;
+  justify-content: center;
+}
+span{
+  margin-right: 12px;
+  color: black;
+}
+
+.options{
+  display: grid;
+  grid-column: 2;
+}

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universal Smart Converter Pro</title>
+
+<style>
+:root{
+  --bg:#141e30;
+  --card:#1f2a44;
+  --tile:#00c6ff;
+  --text:white;
+}
+body.light{
+  --bg:#f3f6ff;
+  --card:#ffffff;
+  --tile:#0072ff;
+  --text:#111;
+}
+*{box-sizing:border-box;font-family:Segoe UI,Arial}
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,var(--bg),#243b55);
+  color:var(--text);
+}
+header{
+  padding:15px;
+  text-align:center;
+  position:relative;
+}
+#toggle{
+  position:absolute;
+  right:15px;
+  top:15px;
+  padding:6px 12px;
+  border-radius:20px;
+  border:none;
+  cursor:pointer;
+  background:#ffd700;
+  font-weight:bold;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:15px;
+  padding:15px;
+}
+.tile{
+  background:linear-gradient(135deg,var(--tile),#0072ff);
+  padding:18px;
+  border-radius:14px;
+  text-align:center;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+.tile:hover{transform:scale(1.07)}
+.panel{
+  background:var(--card);
+  margin:12px;
+  padding:15px;
+  border-radius:14px;
+}
+.hidden{display:none}
+input,select,button{
+  width:100%;
+  padding:10px;
+  margin:6px 0;
+  border-radius:8px;
+  border:none;
+  font-size:1rem;
+}
+button{
+  background:var(--tile);
+  font-weight:bold;
+  cursor:pointer;
+}
+.result{
+  margin-top:8px;
+  font-weight:bold;
+  font-size:1.1rem;
+}
+.history-item{
+  background:rgba(255,255,255,.12);
+  padding:6px 10px;
+  border-radius:6px;
+  margin:5px 0;
+}
+.swap-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 5px auto;
+  display: block;
+  background: var(--tile);
+  color: white;
+  border: 2px solid rgba(255,255,255,0.2);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <p><p></p></p>
+<h1>Universal Smart Converter Pro</h1>
+<p>Advanced Multi Calculator System</p>
+
+<button id="toggle" onclick="toggleMode()">🌙</button>
+</header>
+
+<main>
+
+<section id="dashboard" class="grid">
+  <div class="tile" onclick="show('converter')">🔁 Converter</div>
+  <div class="tile" onclick="show('geometry')">📐 Geometry</div>
+  <div class="tile" onclick="show('volume')">🧊 Volume</div>
+  <div class="tile" onclick="show('bmi')">⚖️ BMI</div>
+  <div class="tile" onclick="show('formula')">📚 Formula</div>
+  <div class="tile" onclick="show('history')">🕒 History</div>
+</section>
+
+<!-- UNIT CONVERTER -->
+<section id="converter" class="panel hidden">
+<h2>Unit Converter</h2>
+
+<div class="grid">
+  <div class="tile" onclick="unitUI('length')">Length</div>
+  <div class="tile" onclick="unitUI('weight')">Weight</div>
+  <div class="tile" onclick="unitUI('temperature')">Temperature</div>
+  <div class="tile" onclick="unitUI('time')">Time</div>
+  <div class="tile" onclick="unitUI('speed')">Speed</div>
+</div>
+
+<div id="unitUI"></div>
+<div id="unitResult" class="result"></div>
+
+<button onclick="goHome()">⬅ Back</button>
+</section>
+
+<!-- BMI -->
+<section id="bmi" class="panel hidden">
+<h2>BMI Calculator</h2>
+<input id="w" placeholder="Weight (kg)">
+<input id="h" placeholder="Height (cm)">
+<table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+      <tr style="border-bottom: 1px solid var(--tile);">
+        <th style="padding: 5px;">BMI Range</th>
+        <th style="padding: 5px;">Category</th>
+      </tr>
+      <tr><td style="padding: 5px;">Below 18.5</td><td style="padding: 5px; color: #ffeb3b;">Underweight</td></tr>
+      <tr><td style="padding: 5px;">18.5 – 24.9</td><td style="padding: 5px; color: #4caf50;">Normal weight</td></tr>
+      <tr><td style="padding: 5px;">25.0 – 29.9</td><td style="padding: 5px; color: #ff9800;">Overweight</td></tr>
+      <tr><td style="padding: 5px;">30.0 or Higher</td><td style="padding: 5px; color: #f44336;">Obese</td></tr>
+    </table>
+<button onclick="bmiCalc()">Calculate</button>
+<div id="bmiResult" class="result"></div>
+<button onclick="goHome()">⬅ Back</button>
+</section>
+
+<!-- GEOMETRY -->
+<section id="geometry" class="panel hidden">
+<h2>Geometry Calculator</h2>
+<div class="grid">
+<div class="tile" onclick="geo('rectangle')">Rectangle</div>
+<div class="tile" onclick="geo('square')">Square</div>
+<div class="tile" onclick="geo('triangle')">Triangle</div>
+<div class="tile" onclick="geo('circle')">Circle</div>
+<div class="tile" onclick="geo('semicircle')">Semi Circle</div>
+<div class="tile" onclick="geo('parallelogram')">Parallelogram</div>
+<div class="tile" onclick="geo('rhombus')">Rhombus</div>
+<div class="tile" onclick="geo('trapezium')">Trapezium</div>
+</div>
+<div id="geoUI"></div>
+<div id="geoRes" class="result"></div>
+<button onclick="goHome()">⬅ Back</button>
+</section>
+
+<!-- VOLUME -->
+<section id="volume" class="panel hidden">
+<h2>Volume & Surface Area</h2>
+<div class="grid">
+<div class="tile" onclick="vol('cuboid')">Cuboid</div>
+<div class="tile" onclick="vol('cube')">Cube</div>
+<div class="tile" onclick="vol('sphere')">Sphere</div>
+<div class="tile" onclick="vol('hemisphere')">Hemisphere</div>
+<div class="tile" onclick="vol('cylinder')">Cylinder</div>
+<div class="tile" onclick="vol('hollow')">Hollow Cylinder</div>
+<div class="tile" onclick="vol('cone')">Cone</div>
+</div>
+<div id="volUI"></div>
+<div id="volRes" class="result"></div>
+<button onclick="goHome()">⬅ Back</button>
+</section>
+
+<section id="formula" class="panel hidden">
+<h2>Formula Library</h2>
+<pre>
+Unit Conversion 
+Lenght :
+1 mile = 1.609km  | 1 KM = 1000m
+1 m = 100cm       | 1 ft = 12in
+1 in = 2.54cm     | 1 cm = 10mm
+
+Weight :
+1 tonne = 1000 kg  | 1 kg = 2.204 lb
+1 kg = 1000 g     | 1 g = 1000 mg
+
+Temperature :
+0°C = 273 K  |  0°C = 32 F
+°F = (°C × 9/5) + 32
+K = °C + 273.15
+
+Time :
+1 year = 12 months = 52 weeks = 365 days
+1 month = 4 weeks=30/31 days
+1 week = 7 days
+1 day = 24 hr
+1 hr = 60 min
+1 min = 60 sec
+
+GEOMETRY
+Area :
+Rectangle = l×b
+Square = a²
+Triangle = √s(s-a)(s-b)(s-c) where s = (a+b+c)/2
+Right Angled Triangle = ½ (base x height)
+Equlateral Triangle= √3/4 a²
+Circle = πr²
+Semi Circle = ½πr²
+Parallelogram = b x h
+Rhombus =  ½(d1 x d2) 
+Trapezium = ½ (a+b) x h
+
+Perimeter :
+Rectangle = 2(l+b)
+Square = Rhombus = 4a
+Parallelogram = 2(base + slantside)
+Triangle = a+b+c
+Equlateral Triangle = 3a
+Circle Circumference = 2πr
+Semi Circle = πr + 2r
+Trapezium = a+b+c+d 
+
+VOLUME 
+Cube: V = a³
+Cuboid: V = lbh,
+Sphere: V = 4/3πr³
+Hemisphere: V = 2/3πr³
+Cylinder: V = πr²h
+Hollow Cylinder: V = πh(R²-r²)
+Cone: V = 1/3πr²h
+
+SURFACE AREA 
+Cuboid:     LSA = 2(lb+bh)  TSA = 2(lb+bh+lh)
+Cube:       LSA = 4a²  TSA = 6a²
+Cone:       CSA = πrl  TSA = πr(l+r)
+Sphere:     CSA = 4πr² TSA = 4πr²
+Cylinder:   CSA = 2πrh TSA = 2πr(h+r)
+Hemisphere: CSA = 2πr² TSA = 3πr²
+Hollow Cylinder: CSA = 2πh(R+r)
+
+
+BMI = weight (kg) / height²(in m)
+Speed = distance / time
+</pre>
+<button onclick="goHome()">⬅ Back</button>
+</section>
+
+<!-- HISTORY -->
+<section id="history" class="panel hidden">
+<h2>Calculation History</h2>
+<div id="historyList"></div>
+<button onclick="clearHistory()">Clear</button>
+<button onclick="goHome()">⬅ Back</button>
+</section>
+
+</main>
+
+<script>
+let history=[];
+
+function saveHistory(t){
+  history.unshift(t);
+  historyList.innerHTML=history.map(h=>`<div class="history-item">${h}</div>`).join("");
+}
+function clearHistory(){history=[];historyList.innerHTML=""}
+
+function toggleMode(){document.body.classList.toggle("light");}
+function show(id){document.querySelectorAll('.panel').forEach(p=>p.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');}
+function goHome(){document.querySelectorAll('.panel').forEach(p=>p.classList.add('hidden'));}
+
+/* ================= UNIT CONVERTER ================= */
+
+function unitUI(type){
+  let ui=document.getElementById("unitUI");
+
+  if(type=="length") ui.innerHTML=`
+  <input id=v placeholder="Value">
+  <select id=f>
+    <option value="mm">mm</option>
+    <option value ="cm">cm</option>
+    <option value="in">in</option>
+    <option value="ft">ft</option>
+    <option value="m">m</option>
+    <option value="km">km</option>
+    <option value="mile">mile</option>
+    </select>
+    <button class="swap-btn" onclick="swapUnits()">⇅</button>
+  <select id=t>
+    <option value="mm">mm</option>
+    <option value="cm">cm</option>
+    <option value="in">in</option>
+    <option value="ft">ft</option>
+    <option value="m">m</option>
+    <option value="km">km</option>
+    <option value="mile">mile</option>
+    </select>
+  <button onclick="convertLength()">Convert</button>`;
+
+  if(type=="weight") ui.innerHTML=`
+  <input id=v placeholder="Value">
+  <select id=f><option>kg</option><option>g</option><option>lb</option></select>
+  <button class="swap-btn" onclick="swapUnits()">⇅</button>
+  <select id=t><option>kg</option><option>g</option><option>lb</option></select>
+  <button onclick="convertWeight()">Convert</button>`;
+
+  if(type=="temperature") ui.innerHTML=`
+  <input id=v placeholder="Value">
+  <select id=f><option>°C</option><option>°F</option><option>K</option></select>
+  <button class="swap-btn" onclick="swapUnits()">⇅</button>
+  <select id=t><option>°C</option><option>°F</option><option>K</option></select>
+  <button onclick="convertTemp()">Convert</button>`;
+
+  if(type == "time") ui.innerHTML = `
+  <input id="v" type="number" placeholder="Value">
+  <select id="f">
+    <option value="sec">sec</option>
+    <option value="min">min</option>
+    <option value="hour">hour</option>
+    <option value="day">day</option>
+    <option value="week">week</option>
+    <option value="month">month</option>
+    <option value="year">year</option>
+  </select>
+  <button class="swap-btn" onclick="swapUnits()">⇅</button>
+  <select id="t">
+    <option value="sec">sec</option>
+    <option value="min">min</option>
+    <option value="hour">hour</option>
+    <option value="day">day</option>
+    <option value="week">week</option>
+    <option value="month">month</option>
+    <option value="year">year</option>
+  </select>
+  <button onclick="convertTime()">Convert</button>`;
+
+
+ if(type=="speed") ui.innerHTML=`
+ <input id=v placeholder="Value">
+ <select id=f><option>m/s</option><option>km/h</option><option>mph</option></select>
+ <button class="swap-btn" onclick="swapUnits()">⇅</button>
+ <select id=t><option>m/s</option><option>km/h</option><option>mph</option></select>
+ <button onclick="convertSpeed()">Convert</button>`;
+}
+
+/* -----------SwapButton--------*/
+function swapUnits() {
+    // 1. Grab the two select elements
+    let fromSelect = document.getElementById("f");
+    let toSelect = document.getElementById("t");
+
+    // 2. Swap their values using a temporary variable
+    let temp = fromSelect.value;
+    fromSelect.value = toSelect.value;
+    toSelect.value = temp;
+}
+
+
+/* ---------- Length ---------- */
+function convertLength(){
+ let v=+document.getElementById("v").value;
+ let f=document.getElementById("f").value;
+ let t=document.getElementById("t").value;
+ let map={
+    mm: 0.001,
+    cm:0.01,
+    in: 0.0254,
+    ft: 0.3048,
+    m:1,
+    km:1000,
+    mile: 1609.34};
+ let r=v*map[f]/map[t];
+ unitResult.innerText=`Result = ${r.toFixed(4)} ${t}`;
+ saveHistory(`Length: ${v}${f} → ${r.toFixed(4)}${t}`);
+}
+
+/* ---------- Weight ---------- */
+function convertWeight(){
+ let v=+document.getElementById("v").value;
+ let f=document.getElementById("f").value;
+ let t=document.getElementById("t").value;
+ let map={kg:1,g:0.001,lb:0.453592};
+ let r=v*map[f]/map[t];
+ unitResult.innerText=`Result = ${r.toFixed(4)} ${t}`;
+ saveHistory(`Weight: ${v}${f} → ${r.toFixed(4)}${t}`);
+}
+
+/* ---------- Temperature ---------- */
+function convertTemp(){
+ let v=+document.getElementById("v").value;
+ let f=document.getElementById("f").value;
+ let t=document.getElementById("t").value;
+ let r=v;
+
+ if(f=="°C"){ if(t=="°F") r=v*9/5+32; if(t=="K") r=v+273.15;}
+ if(f=="°F"){ if(t=="°C") r=(v-32)*5/9; if(t=="K") r=(v-32)*5/9+273.15;}
+ if(f=="K"){ if(t=="°C") r=v-273.15; if(t=="°F") r=(v-273.15)*9/5+32;}
+
+ unitResult.innerText=`Result = ${r.toFixed(2)} ${t}`;
+ saveHistory(`Temp: ${v}${f} → ${r.toFixed(2)}${t}`);
+}
+
+/* ---------- Time ---------- */
+function convertTime(){
+ let v=+document.getElementById("v").value;
+ let f=document.getElementById("f").value;
+ let t=document.getElementById("t").value;
+ let map={
+      sec:1,
+      min:60,
+      hour:3600,
+      day: 86400,
+      week: 604800,
+      month: 2629746, // Average (30.44 days)
+      year: 31536000 }// for 365 days exact
+ let r=v*map[f]/map[t];
+ unitResult.innerText=`Result = ${r.toFixed(4)} ${t}`;
+ saveHistory(`Time: ${v}${f} → ${r.toFixed(4)}${t}`);
+}
+
+/* ---------- Speed ---------- */
+function convertSpeed(){
+ let v=+document.getElementById("v").value;
+ let f=document.getElementById("f").value;
+ let t=document.getElementById("t").value;
+ let r=v;
+
+ if(f=="m/s"){ if(t=="km/h") r=v*3.6; if(t=="mph") r=v*2.23694;}
+ if(f=="km/h"){ if(t=="m/s") r=v/3.6; if(t=="mph") r=v*0.621371;}
+ if(f=="mph"){ if(t=="m/s") r=v/2.23694; if(t=="km/h") r=v/0.621371;}
+
+ unitResult.innerText=`Result = ${r.toFixed(3)} ${t}`;
+ saveHistory(`Speed: ${v}${f} → ${r.toFixed(3)}${t}`);
+}
+
+/* BMI */
+function bmiCalc(){
+  let weight = parseFloat(w.value);
+  let height = parseFloat(h.value) / 100;
+  if (weight > 0 && height > 0) {
+        let bmi=(weight/((height)**2));
+        bmiResult.innerText="BMI = "+bmi;
+        let category = "";
+        
+        if (bmi < 18.5) category = "Underweight";
+        else if (bmi < 25) category = "Normal weight";
+        else if (bmi < 30) category = "Overweight";
+        else category = "Obese";
+        
+        document.getElementById("bmiResult").innerHTML = `BMI = ${bmi} <br> <span style="font-size:0.9rem; opacity:1.0;">Category: ${category}</span>`;
+        saveHistory(`BMI: ${bmi.toFixed(2)} (${category})`);
+    } else {
+        document.getElementById("bmiResult").innerText = "Please enter valid numbers";
+    }
+}
+
+/* Geometry */
+function geo(s){
+ let ui=geoUI;
+ if(s=="rectangle") ui.innerHTML=`<input id=l placeholder=Length><input id=b placeholder=Breadth><button onclick="geoRes.innerText='Area='+(l.value*b.value)+' | Perimeter='+(2*(+l.value + +b.value))">Calculate</button>`;
+ else if(s=="square") ui.innerHTML=`<input id=a placeholder=Side><button onclick="geoRes.innerText='Area='+(a.value*a.value)+' | Perimeter='+(4*a.value)">Calculate</button>`;
+ else if(s=="triangle") ui.innerHTML=`<input id=a placeholder=A><input id=b placeholder=B><input id=c placeholder=C><button onclick="let p=(+a.value+ +b.value+ +c.value)/2; geoRes.innerText='Area='+Math.sqrt(p*(p-a.value)*(p-b.value)*(p-c.value)).toFixed(2)+' | Perimeter='+(+a.value+ +b.value+ +c.value)">Calculate</button>`;
+ else if(s=="circle") ui.innerHTML=`<input id=r placeholder=Radius><button onclick="geoRes.innerText='Area='+(Math.PI*r.value*r.value).toFixed(2)+' | Circumference='+(2*Math.PI*r.value).toFixed(2)">Calculate</button>`;
+ else if(s=="semicircle"){
+    ui.innerHTML=`
+    <input id=r placeholder=Radius>
+    <button onclick="
+      let radius=+r.value;
+      geoRes.innerText=
+      'Area='+(0.5*Math.PI*radius*radius).toFixed(2)+
+      ' | Perimeter='+(Math.PI*radius + 2*radius).toFixed(2);
+    ">Calculate</button>`;
+}
+else if(s=="parallelogram"){
+ ui.innerHTML=`
+ <input id=b placeholder=Base>
+ <input id=h placeholder=Height>
+ <input id=s placeholder=SlantSide>
+ <button onclick="
+   geoRes.innerText=
+   'Area='+(+b.value * +h.value) +
+  ' | Perimeter='+(2*(+b.value + +s.value));
+ ">Calculate</button>`;
+}
+else if(s=="rhombus"){
+ ui.innerHTML=`
+ <input id=d1 placeholder=Diagonal1>
+ <input id=d2 placeholder=Diagonal2>
+ <input id=a placeholder=Side>
+ <button onclick="
+   geoRes.innerText=
+   'Area='+(0.5*d1.value*d2.value)+
+   ' | Perimeter='+(4*a.value);
+ ">Calculate</button>`;
+}
+  else if(s=="trapezium"){
+  ui.innerHTML=`
+  <input id=a placeholder=SideA>
+  <input id=b placeholder=SideB>
+  <input id=h placeholder=Height>
+  <input id=c placeholder=SideC>
+  <input id=d placeholder=SideD>
+  <p>Here In this Trapezium Side A and Side B are parallel to each other</p>
+  <button onclick="
+    geoRes.innerText=
+    'Area='+(0.5*(+a.value + +b.value)*h.value)+
+    ' | Perimeter='+(+a.value + +b.value + +c.value + +d.value);
+  ">Calculate</button>`;
+  }
+}
+
+/* Volume */
+function vol(s){
+ let ui=volUI;
+ if(s=="cube") ui.innerHTML=`<input id=a placeholder=Side><button onclick="volRes.innerText='Volume='+(a.value**3)+' | TSA='+(6*a.value*a.value)">Calculate</button>`;
+ if(s=="sphere") ui.innerHTML=`<input id=r placeholder=Radius><button onclick="volRes.innerText='Volume='+(4/3*Math.PI*r.value**3).toFixed(2)+' | SA='+(4*Math.PI*r.value*r.value).toFixed(2)">Calculate</button>`;
+ if(s=="hemisphere") ui.innerHTML=`<input id=r placeholder=Radius><button onclick="volRes.innerText='Volume='+(2/3*Math.PI*r.value**3).toFixed(2)+' | TSA='+(3*Math.PI*r.value*r.value).toFixed(2)">Calculate</button>`;
+ if(s=="hollow") ui.innerHTML=`<input id=R placeholder=Outer Radius><input id=r placeholder=Inner Radius><input id=h placeholder=Height><button onclick="volRes.innerText='Volume='+(Math.PI*h.value*(R.value*R.value-r.value*r.value)).toFixed(2)">Calculate</button>`;
+ if(s=="cone") ui.innerHTML=`<input id=r placeholder=Radius><input id=h placeholder=Height><button onclick="let l=Math.sqrt(r.value*r.value+h.value*h.value); volRes.innerText='Volume='+(1/3*Math.PI*r.value*r.value*h.value).toFixed(2)+' | TSA='+(Math.PI*r.value*(l+r.value)).toFixed(2)">Calculate</button>`;
+if(s=="cuboid")
+ ui.innerHTML=`
+ <input id=l placeholder=Length>
+ <input id=b placeholder=Breadth>
+ <input id=h placeholder=Height>
+ <button onclick="
+   volRes.innerText=
+   'Volume='+(l.value*b.value*h.value)+
+   ' | TSA='+(2*(l.value*b.value + b.value*h.value + l.value*h.value));
+ ">Calculate</button>`;
+
+if(s=="cylinder")
+ ui.innerHTML=`
+ <input id=r placeholder=Radius>
+ <input id=h placeholder=Height>
+ <button onclick="
+   volRes.innerText=
+   'Volume='+(Math.PI*r.value*r.value*h.value).toFixed(2)+
+   ' | TSA='+(2*Math.PI*r.value*(h.value + r.value)).toFixed(2);
+ ">Calculate</button>`;
+
+}
+</script>
+
+</body>
+</html>

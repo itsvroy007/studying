@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universal Smart Converter Pro</title>
+
+<style>
+:root{
+  --bg:#141e30;
+  --card:#1f2a44;
+  --tile:#00c6ff;
+  --text:white;
+}
+body.light{
+  --bg:#f3f6ff;
+  --card:#ffffff;
+  --tile:#0072ff;
+  --text:#111;
+}
+*{box-sizing:border-box;font-family:Segoe UI,Arial}
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,var(--bg),#243b55);
+  color:var(--text);
+  transition:.3s;
+}
+header{
+  padding:15px;
+  text-align:center;
+  position:relative;
+}
+#toggle{
+  position:absolute;
+  right:15px;
+  top:15px;
+  padding:6px 12px;
+  border-radius:20px;
+  border:none;
+  cursor:pointer;
+  background:#ffd700;
+  font-weight:bold;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:15px;
+  padding:15px;
+}
+.tile{
+  background:linear-gradient(135deg,var(--tile),#0072ff);
+  padding:18px;
+  border-radius:14px;
+  text-align:center;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+.tile:hover{transform:scale(1.05)}
+.panel{
+  background:var(--card);
+  margin:12px;
+  padding:15px;
+  border-radius:14px;
+}
+.hidden{display:none}
+input,select,button{
+  width:100%;
+  padding:10px;
+  margin:6px 0;
+  border-radius:8px;
+  border:none;
+  font-size:1rem;
+}
+button{
+  background:var(--tile);
+  font-weight:bold;
+  cursor:pointer;
+}
+.result{
+  margin-top:8px;
+  font-weight:bold;
+  font-size:1.1rem;
+}
+pre{
+  background:rgba(0,0,0,.3);
+  padding:12px;
+  border-radius:10px;
+  font-size:.9rem;
+}
+.history-item{
+  background:rgba(255,255,255,.1);
+  padding:6px 10px;
+  border-radius:6px;
+  margin:4px 0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Universal Smart Converter Pro</h1>
+<p>Advanced Multi Calculator System</p>
+<button id="toggle" onclick="toggleMode()">🌙 Dark</button>
+</header>
+
+<main>
+
+<section id="dashboard" class="grid">
+  <div class="tile" onclick="show('converter')">🔁 Converter</div>
+  <div class="tile" onclick="show('geometry')">📐 Geometry</div>
+  <div class="tile" onclick="show('volume')">🧊 Volume</div>
+  <div class="tile" onclick="show('speed')">🚀 Speed</div>
+  <div class="tile" onclick="show('bmi')">⚖️ BMI</div>
+  <div class="tile" onclick="show('formula')">📚 Formula</div>
+  <div class="tile" onclick="show('history')">🕒 History</div>
+</section>
+
+<section id="geometry" class="panel hidden">
+<h2>Geometry Calculator</h2>
+<div class="grid">
+<div class="tile" onclick="geo('rectangle')">Rectangle</div>
+<div class="tile" onclick="geo('square')">Square</div>
+<div class="tile" onclick="geo('triangle')">Triangle</div>
+<div class="tile" onclick="geo('circle')">Circle</div>
+<div class="tile" onclick="geo('semicircle')">Semi Circle</div>
+<div class="tile" onclick="geo('parallelogram')">Parallelogram</div>
+<div class="tile" onclick="geo('rhombus')">Rhombus</div>
+<div class="tile" onclick="geo('trapezium')">Trapezium</div>
+</div>
+<div id="geoUI"></div>
+<div id="geoRes" class="result"></div>
+<button onclick="goHome()">⬅ Back</button>
+</section>
+
+<section id="volume" class="panel hidden">
+<h2>Volume & Surface Area</h2>
+<div class="grid">
+<div class="tile" onclick="vol('cube')">Cube</div>
+<div class="tile" onclick="vol('cuboid')">Cuboid</div>
+<div class="tile" onclick="vol('sphere')">Sphere</div>
+<div class="tile" onclick="vol('hemisphere')">Hemisphere</div>
+<div class="tile" onclick="vol('cylinder')">Cylinder</div>
+<div class="tile" onclick="vol('hollow')">Hollow Cylinder</div>
+<div class="tile" onclick="vol('cone')">Cone</div>
+</div>
+<div id="volUI"></div>
+<div id="volRes" class="result"></div>
+<button onclick="goHome()">⬅ Back</button>
+</section>
+
+<section id="formula" class="panel hidden">
+<h2>Formula Library</h2>
+<pre>
+GEOMETRY
+Rectangle: Area = l×b, Perimeter = 2(l+b)
+Square: Area = a², Perimeter = 4a
+Triangle: Area = √3/4 a², Perimeter = 3a
+Circle: Area = πr², Circumference = 2πr
+Semi Circle: Area = ½πr², Perimeter = πr + 2r
+
+VOLUME & SURFACE AREA
+Cube: V = a³, TSA = 6a²
+Cuboid: V = lbh, TSA = 2(lb+bh+lh)
+Sphere: V = 4/3πr³, SA = 4πr²
+Hemisphere: V = 2/3πr³, CSA = 2πr², TSA = 3πr²
+Cylinder: V = πr²h, CSA = 2πrh, TSA = 2πr(h+r)
+Hollow Cylinder: V = πh(R²-r²), CSA = 2πh(R+r)
+Cone: V = 1/3πr²h, CSA = πrl, TSA = πr(l+r)
+
+BMI = weight / height²
+Speed = distance / time
+</pre>
+<button onclick="goHome()">⬅ Back</button>
+</section>
+
+<section id="history" class="panel hidden">
+<h2>History</h2>
+<div id="historyList"></div>
+<button onclick="clearHistory()">Clear</button>
+<button onclick="goHome()">⬅ Back</button>
+</section>
+
+</main>
+
+<script>
+let history=[];
+
+function show(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+}
+function goHome(){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.add('hidden'));
+}
+function saveHistory(t){
+  history.unshift(t);
+  historyList.innerHTML=history.map(h=>`<div class='history-item'>${h}</div>`).join('');
+}
+function clearHistory(){history=[];historyList.innerHTML=''}
+
+function toggleMode(){
+  document.body.classList.toggle('light');
+}
+
+/* GEOMETRY */
+function geo(s){
+ let ui=document.getElementById("geoUI");
+ if(s=="rectangle") ui.innerHTML=`<input id=l placeholder=Length><input id=b placeholder=Breadth><button onclick="geoRes.innerText='Area='+l.value*b.value+' | Perimeter='+2*(+l.value + +b.value);saveHistory('Rectangle')">Calculate</button>`;
+ if(s=="square") ui.innerHTML=`<input id=a placeholder=Side><button onclick="geoRes.innerText='Area='+a.value*a.value+' | Perimeter='+4*a.value">Calculate</button>`;
+ if(s=="circle") ui.innerHTML=`<input id=r placeholder=Radius><button onclick="geoRes.innerText='Area='+(3.1416*r.value*r.value).toFixed(2)+' | Circumference='+(2*3.1416*r.value).toFixed(2)">Calculate</button>`;
+}
+
+/* VOLUME */
+function vol(s){
+ let ui=document.getElementById("volUI");
+ if(s=="sphere") ui.innerHTML=`<input id=r placeholder=Radius><button onclick="volRes.innerText='Volume='+(4/3*3.1416*r.value**3).toFixed(2)+' | Surface Area='+(4*3.1416*r.value*r.value).toFixed(2)">Calculate</button>`;
+ if(s=="hemisphere") ui.innerHTML=`<input id=r placeholder=Radius><button onclick="volRes.innerText='Volume='+(2/3*3.1416*r.value**3).toFixed(2)+' | TSA='+(3*3.1416*r.value*r.value).toFixed(2)">Calculate</button>`;
+ if(s=="hollow") ui.innerHTML=`<input id=R placeholder=Outer Radius><input id=r placeholder=Inner Radius><input id=h placeholder=Height><button onclick="volRes.innerText='Volume='+(3.1416*h.value*(R.value*R.value-r.value*r.value)).toFixed(2)">Calculate</button>`;
+}
+</script>
+
+</body>
+</html>

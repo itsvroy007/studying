@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Hand Cricket
+        </title>
+        <style>
+            body {
+                background-color: black;
+                color: aliceblue;
+                font-family: Arial, Helvetica, sans-serif;
+                text-align: center;
+            }
+            .game_name{
+                background-color: black;
+                color: white;
+                align-content: center;
+                font-weight: bold;
+                font-style: normal;
+            }
+            button {
+                margin: 5px;
+                padding: 10px 15px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+            .hidden{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h1 class="game_name">🏏HAND CRICKET GAME</h1>
+            <h3 style=" color:(aliceblue);">Rules are as follow: </h3>
+            <p style="color : aliceblue; font-weight: bold;">
+                1.If entered num by player and computer matched then player out else continue till get outs
+                <br>
+                2.player have to score more run than computer to wins or out computer before it does
+            </p>
+        </div>
+        <div id="choice" class="hidden">
+            <h2>You won the toss! Choose:</h2>
+            <button onclick="chooseRole('bat')">Bat</button>
+            <button onclick="chooseRole('bowl')">Bowl</button>
+        </div>
+
+        <h2 id="status"></h2>
+        <h3 id="score">Your Score: 0 | Computer Score: 0</h3>
+        <h3 id="target"></h3>
+        
+        <div id="toss">
+            <h2>Toss Time</h2>
+            <button onclick="doToss('odd')">Odd</button>
+            <button onclick="doToss('even')">Even</button>
+        </div>
+
+        <div class="buttons hidden" id="buttons">
+            <button onclick="play(1)">1</button>
+            <button onclick="play(2)">2</button>
+            <button onclick="play(3)">3</button>
+            <button onclick="play(4)">4</button>
+            <button onclick="play(5)">5</button>
+            <button onclick="play(6)">6</button>
+            <button onclick="play(7)">7</button>
+            <button onclick="play(8)">8</button>
+            <button onclick="play(9)">9</button>
+            <button onclick="play(10)">10</button>
+        </div>
+        <button id="restart" class="hidden" onclick="restartGame()">
+            🔄 Restart
+        </button>
+
+        
+        <script>
+            const cmpMove = getRandomInt(1, 10);
+            let score = 0;
+            function run_scoring(run){
+                if(cmpMove === run){
+                    console.log('player out');
+                }
+                else if(cmp != run){
+                    score = score + run ;
+                }
+            }
+            function getRandomInt(min , max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+        </script>
+    </body>
+</html>

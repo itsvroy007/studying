@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+
+        
+
+        .display{
+            color: #00ffcc;
+            padding: 15px;
+            font-size: 2rem;
+            text-align: right;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        body{
+            background-color: rgb(30, 30, 30);
+            color: aliceblue;
+        }
+        .button{
+            display: grid;           
+            grid-template-columns: repeat(4,1fr);
+            gap: 6px;
+        }
+
+        button{
+            color: aliceblue;
+            padding: 6px;            cursor: pointer;
+            background-color: #2d2d44;;
+        }
+        .operator {
+            background: #ff9500;
+        }
+
+        .equal {
+            background: #00cc99;
+            grid-column: span ;
+        }
+
+        .clear {
+            background: #fa0101;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="panel">
+            <h1>Simple Calculator</h1>
+            <div id="display" class="display">0</div>            
+            <div class = 'button'>
+                
+                <button class="clear" onclick="clearAll();">C</button>
+                <button onclick="deleteLast();">del</button>
+                <button onclick="press('%');">%</button>
+                <button class="operator"  onclick="press('/');">/</button> 
+                <button onclick="press('7');">7</button>
+                <button onclick="press('8');">8</button>
+                <button onclick="press('9');">9</button>
+                <button class="operator" onclick="press('*');">*</button>
+                
+                <button onclick="press('4');">4</button>
+                <button onclick="press('5');">5</button>
+                <button onclick="press('6');">6</button>
+                <button class="operator" onclick="press('-');">-</button>
+                
+                <button onclick="press('1');">1</button>
+                <button onclick="press('2');">2</button>
+                <button onclick="press('3');">3</button>
+                <button class="operator" onclick="press('+');">+</button>
+                
+                <button onclick="press('(');">(</button>
+                <button onclick="press(')');">)</button>
+                <button onclick="press('0');">0</button>
+                <button class="equal" onclick="calculate();">=</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let expression = '';
+        function press(value){
+            expression += value;
+            updateDisplay(expression);
+        }
+
+        function updateDisplay(value){
+            document.getElementById('display').innerText = value;
+        }
+
+        function calculate() {
+        try {
+            let r = eval(expression);
+            //addHistory(expression + " = " + r);
+            expression = r.toString();
+            updateDisplay(Number(expression));
+        } catch {
+            updateDisplay("Error");
+        }
+    }
+
+    function deleteLast() {
+        expression = expression.slice(0, -1);
+        updateDisplay(expression || "0");
+    }
+
+        function clearAll(){
+            expression = '0';
+            updateDisplay(expression);
+        }
+        document.addEventListener("keydown", function (e) {
+        const k = e.key;
+        if ("0123456789+-*/().".includes(k)) press(k);
+        else if (k === "Enter") calculate();
+        else if (k === "Backspace") deleteLast();
+        else if (k === "Escape") clearAll();
+        });
+        
+    </script>
+</body>
+</html>

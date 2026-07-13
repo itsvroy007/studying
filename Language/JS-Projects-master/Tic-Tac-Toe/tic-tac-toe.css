@@ -1,0 +1,122 @@
+:root {
+  --bg: linear-gradient(135deg, #667eea, #764ba2);
+  --card: rgba(255, 255, 255, 0.15);
+  --text: #222;
+  --x-color: #ff4d6d;
+  --o-color: #3a86ff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: white;
+  text-align: center;
+}
+
+/* DARK MODE */
+.dark {
+  --bg: linear-gradient(135deg, #141e30, #243b55);
+  --card: rgba(0, 0, 0, 0.4);
+  --text: #fff;
+}
+
+h1 {
+  margin-top: 20px;
+}
+
+/* GLASS CARD */
+.controls, #scoreboard, #timer, .buttons {
+  backdrop-filter: blur(10px);
+  background: var(--card);
+  border-radius: 12px;
+  padding: 10px;
+  margin: 10px auto;
+  width: fit-content;
+}
+
+/* BUTTONS */
+button, select {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  margin: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+button {
+  background: #ff7a18;
+  color: white;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  background: #ff9a3c;
+}
+
+/* BOARD */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 12px;
+  justify-content: center;
+  margin: 20px;
+}
+
+/* CELLS */
+.cell {
+  width: 100px;
+  height: 100px;
+  font-size: 2.5em;
+  font-weight: bold;
+  background: var(--card);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* HOVER EFFECT */
+.cell:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.3);
+}
+
+/* X and O COLORS */
+.cell.X {
+  color: var(--x-color);
+}
+
+.cell.O {
+  color: var(--o-color);
+}
+
+/* WIN ANIMATION */
+.win {
+  background: linear-gradient(45deg, #00c853, #b2ff59) !important;
+  color: #000 !important;
+  animation: glow 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 10px #00e676; }
+  to { box-shadow: 0 0 25px #69f0ae; }
+}
+
+/* STATUS TEXT */
+#status {
+  font-size: 1.3em;
+  margin-top: 10px;
+}
+
+button:last-child {
+  background: #e63946;
+}
+
+button:last-child:hover {
+  background: #ff4d5a;
+}

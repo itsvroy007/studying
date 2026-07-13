@@ -1,0 +1,44 @@
+.header{
+  background-color: aliceblue;
+  border-color: rgb(169, 169, 169);
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.headerOptions{
+  margin-top: 15px;
+  margin-left: 50px;
+  justify-content: center;
+  
+}
+
+.LogoImage{
+  width: 100px;
+  margin-left: 50px;
+}
+.home,.about,.github,.contact{
+  margin-top: 45px;
+  margin-right: 8px;
+  cursor: pointer;
+  color: rgb(57, 57, 57);
+  
+}
+
+.button-getstarted,.button-login{
+  font-size: 18px;
+  border: none;
+  padding: 7px 7px;
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  align-items: end;
+}
+.button-getstarted{
+  background-color: green;
+}
+
+.button-login{
+  background-color: cornflowerblue;
+}

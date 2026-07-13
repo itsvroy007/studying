@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            to-Doist 
+        </title>
+        <link rel="stylesheet" href="to-dolist.css">
+    </head>
+    <body>
+        <h1 style="font-weight: bold;">
+            Todo List Practice 1
+        </h1>
+        <div class="todo-input-grid">
+            <input placeholder="Task which need to be done??" 
+            class="js-nameInput"
+            onkeydown="handleKeyDown(event);">
+            <input type="date"
+            class="js-date">
+            <button class="addButton" onclick="addTask();">Add</button>
+        
+        </div>
+        
+        <div class="js-todo-List"></div>
+
+        <script src="to-dolist.js"></script>
+    </body>
+</html>

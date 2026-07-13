@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Tac Toe Pro</title>
+    <link rel="stylesheet" href="tic-tac-toe.css">
+</head>
+<body>
+
+<h1>Tic Tac Toe</h1>
+
+<div class="controls">
+  <select id="mode">
+    <option value="pvp">Player vs Player</option>
+    <option value="cpu">Player vs Computer</option>
+  </select>
+
+  <select id="difficulty">
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+
+  <button onclick="toggleDark()">🌙 Toggle Dark</button>
+</div>
+
+<div id="scoreboard">
+  X: <span id="scoreX">0</span> | O: <span id="scoreO">0</span>
+</div>
+
+<div id="timer">Time: 5</div>
+
+<div id="board" class="board"></div>
+
+<p id="status"></p>
+
+<div class="buttons">
+  <button onclick="undoMove()">Undo</button>
+  <button onclick="resetGame()">Play Again</button>
+  <button onclick="resetScore()">Reset Score</button>
+</div>
+
+<script src="tic-tac-toe.js"></script>
+</body>
+</html>

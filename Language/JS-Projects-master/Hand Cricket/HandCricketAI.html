@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hand Cricket Game</title>
+    <link rel="stylesheet" href="cricketGame_style.css">
+</head>
+<body>
+
+    <div>
+            <h1 class="game_name">🏏HAND CRICKET GAME</h1>
+            <h3 style=" color:(rgb(25, 132, 226));">Rules are as follow: </h3>
+            <p style="color : rgb(10, 55, 219); font-weight: bold;">
+                1.If entered num by player and computer matched then player out else game continue till user gets out
+                <br>
+                2.player have to score more run than computer to wins or out computer before it does
+            </p>
+        </div>
+
+
+<div id="toss">
+    <h2>Toss Time</h2>
+    <button onclick="doToss('odd')">Odd</button>
+    <button onclick="doToss('even')">Even</button>
+</div>
+
+<div id="choice" class="hidden">
+    <h2>You won the toss! Choose:</h2>
+    <button onclick="chooseRole('bat')">Bat</button>
+    <button onclick="chooseRole('bowl')">Bowl</button>
+</div>
+
+<h2 id="status"></h2>
+<h3 id="score">Your Score: 0 | Computer Score: 0</h3>
+<h3 id="target"></h3>
+
+<div class="buttons hidden" id="buttons">
+    <button onclick="play(1)">1</button>
+    <button onclick="play(2)">2</button>
+    <button onclick="play(3)">3</button>
+    <button onclick="play(4)">4</button>
+    <button onclick="play(5)">5</button>
+    <button onclick="play(6)">6</button>
+    <button onclick="play(7)">7</button>
+    <button onclick="play(8)">8</button>
+    <button onclick="play(9)">9</button>
+    <button onclick="play(10)">10</button>
+</div>
+
+<p id="result"></p>
+
+<button id="restart" class="hidden" onclick="restartGame()">
+    🔄 Restart
+</button>
+
+<script src="cricketGame_script.js">
+</script>
+</body>
+</html>

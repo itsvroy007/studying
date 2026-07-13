@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspiration Generator</title>
+    <style>
+        /* 1. THEME VARIABLES (The "Color Buckets") */
+:root {
+  --bg-color: #f4f7f6;
+  --container-bg: #ffffff;
+  --text-main: #2d3436;
+  --text-author: #636e72;
+  --accent-primary: #6c63ff;
+  --accent-secondary: #95a5a6;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* 2. DARK MODE OVERRIDES */
+body.dark-theme {
+  --bg-color: #1a1a2e;
+  --container-bg: #16213e;
+  --text-main: #e9ecef;
+  --text-author: #a2a8d3;
+  --accent-primary: #4e44ff;
+  --accent-secondary: #2d3436;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* 3. GENERAL STYLES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* 4. THEME TOGGLE (Top Corner) */
+.theme-wrapper {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+/* 5. THE QUOTE BOX */
+.quote-container {
+  background-color: var(--container-bg);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  width: 90%;
+  max-width: 550px;
+  text-align: center;
+  transition: background 0.4s ease;
+}
+
+#quote {
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+#author {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-author);
+  margin-bottom: 30px;
+}
+
+/* 6. BUTTON STYLING */
+.button-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+#new-quote-btn {
+  background-color: var(--accent-primary);
+}
+
+#copy-btn {
+  background-color: var(--accent-secondary);
+}
+
+button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* 7. RESPONSIVE (Small Screens) */
+@media (max-width: 480px) {
+  .button-container {
+    flex-direction: column;
+  }
+  
+  #quote {
+    font-size: 1.3rem;
+  }
+}
+    </style>
+</head>
+<body>
+
+    <div class="theme-wrapper">
+        <button id="theme-btn">🌙 Dark Mode</button>
+    </div>
+
+    <div class="quote-container">
+        <div class="quote-box">
+            <i class="fas fa-quote-left"></i>
+            <p id="quote">"Press the button to start learning."</p>
+            <h3 id="author">- Beginner's Luck</h3>
+        </div>
+        
+        <div class="button-container">
+            <button id="new-quote-btn">New Quote</button>
+        </div>
+
+        <div class="quote-container">
+            <div class="quote-box">
+                <p id="quote">"Press the button to start learning."</p>
+                <h3 id="author">- Beginner's Luck</h3>
+            </div>
+            <div class="button-container">
+                <button id="copy-btn">📋 Copy Quote</button> <button id="new-quote-btn">New Quote</button>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        // 1. DATA: Our local bank of 25 quotes
+
+const localQuotes = [
+  { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+  { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" },
+  { text: "Everything you’ve ever wanted is on the other side of fear.", author: "George Addair" },
+  { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+  { text: "Hardships often prepare ordinary people for an extraordinary destiny.", author: "C.S. Lewis" },
+  { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+  { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
+  { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
+  { text: "Keep your face always toward the sunshine—and shadows will fall behind you.", author: "Walt Whitman" },
+  { text: "Act as if what you do makes a difference. It does.", author: "William James" },
+  { text: "The best way to predict the future is to create it.", author: "Peter Drucker" },
+  { text: "You are never too old to set another goal or to dream a new dream.", author: "C.S. Lewis" },
+  { text: "Stay hungry, stay foolish.", author: "Steve Jobs" },
+  { text: "What you get by achieving your goals is not as important as what you become by achieving your goals.", author: "Zig Ziglar" },
+  { text: "Dream big and dare to fail.", author: "Norman Vaughan" },
+  { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
+  { text: "It is during our darkest moments that we must focus to see the light.", author: "Aristotle" },
+  { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" },
+  { text: "The only limit to our realization of tomorrow will be our doubts of today.", author: "Franklin D. Roosevelt" },
+  { text: "Your talent determines what you can do. Your motivation determines how much you are willing to do.", author: "Lou Holtz" },
+  { text: "Quality is not an act, it is a habit.", author: "Aristotle" },
+  { text: "Challenges are what make life interesting and overcoming them is what makes life meaningful.", author: "Joshua J. Marine" },
+  { text: "If you want to lift yourself up, lift up someone else.", author: "Booker T. Washington" },
+  { text: "Opportunities don't happen. You create them.", author: "Chris Grosser" },
+  { text: "The journey of a thousand miles begins with one step.", author: "Lao Tzu" },
+  { text: "Knowledge is power.", author: "Francis Bacon" },
+  { text: "Learning never exhausts the mind.", author: "Leonardo da Vinci" },
+  { text: "The expert in anything was once a beginner.", author: "Helen Hayes" },
+  { text: "Self-belief and hard work will always earn you success.", author: "Virat Kohli" },
+  { text: "Formal education will make you a living; self-education will make you a fortune.", author: "Jim Rohn" },
+  { text: "The more that you read, the more things you will know.", author: "Dr. Seuss" },
+  { text: "An investment in knowledge pays the best interest.", author: "Benjamin Franklin" },
+  { text: "I have no special talent. I am only passionately curious.", author: "Albert Einstein" },
+  { text: "The beautiful thing about learning is that nobody can take it away from you.", author: "B.B. King" },
+  { text: "Don't let yesterday take up too much of today.", author: "Will Rogers" },
+  { text: "You learn more from failure than from success.", author: "Unknown" },
+  { text: "Action is the foundational key to all success.", author: "Pablo Picasso" },
+  { text: "The mind is not a vessel to be filled, but a fire to be kindled.", author: "Plutarch" },
+  { text: "Code is like humor. When you have to explain it, it’s bad.", author: "Cory House" },
+  { text: "Fix the cause, not the symptom.", author: "Steve Maguire" },
+  { text: "Optimism is the faith that leads to achievement.", author: "Helen Keller" },
+  { text: "Creativity is intelligence having fun.", author: "Albert Einstein" },
+  { text: "Consistency is more important than perfection.", author: "Unknown" }
+];
+
+// 2. SELECTORS: Grabbing the HTML elements
+const quoteText = document.getElementById('quote');
+const authorText = document.getElementById('author');
+const quoteBtn = document.getElementById('new-quote-btn');
+const themeBtn = document.getElementById('theme-btn');
+
+// 3. FUNCTION: Pick a random quote
+function getNewQuote() {
+    // Generate a random number between 0 and 24 (index of the array)
+    const randomIndex = Math.floor(Math.random() * localQuotes.length);
+    const selectedQuote = localQuotes[randomIndex];
+
+    // Update the text on the screen
+    quoteText.innerText = `"${selectedQuote.text}"`;
+    authorText.innerText = `- ${selectedQuote.author}`;
+}
+
+// 4. FUNCTION: Toggle Dark Mode
+themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+    
+    // Change button text based on the mode
+    if (document.body.classList.contains('dark-theme')) {
+        themeBtn.innerText = "☀️ Light Mode";
+    } else {
+        themeBtn.innerText = "🌙 Dark Mode";
+    }
+});
+
+// 5. EVENTS: Listen for clicks
+quoteBtn.addEventListener('click', getNewQuote);
+
+// Initialize with a quote so the page isn't empty on load
+getNewQuote();
+
+// Copy to clipBoard function 
+const copyBtn = document.getElementById('copy-btn');
+
+async function copyToClipboard() {
+    // 1. Combine the quote and author into one string
+    const textToCopy = `${quoteText.innerText} ${authorText.innerText}`;
+
+    try {
+        // 2. Use the modern Navigator API to write to clipboard
+        await navigator.clipboard.writeText(textToCopy);
+        
+        // 3. Visual Feedback: Change button text temporarily
+        const originalText = copyBtn.innerText;
+        copyBtn.innerText = "✅ Copied!";
+        copyBtn.style.backgroundColor = "#2ecc71"; // Change to green
+
+        // 4. Reset the button after 2 seconds
+        setTimeout(() => {
+            copyBtn.innerText = originalText;
+            copyBtn.style.backgroundColor = ""; // Reset to CSS default
+        }, 2000);
+
+    } catch (err) {
+        console.error("Failed to copy: ", err);
+        alert("Oops, couldn't copy that!");
+    }
+}
+
+// 5. Add the Event Listener
+copyBtn.addEventListener('click', copyToClipboard);
+
+
+    </script>
+</body>
+</html>

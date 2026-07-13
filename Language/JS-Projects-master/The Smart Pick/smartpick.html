@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE SMART PICK | Buying Guide</title>
+    <link rel="stylesheet" href="smartpick.css">
+</head>
+<body>
+    <header>
+        <h1>THE SMART PICK</h1>
+        <p>Smart Guides for Smarter Purchases</p>
+    </header>
+
+    <div class="app-container">
+        <!-- <aside class="sidebar">
+            <h3>Categories</h3>
+            <button onclick="renderCategory('induction')">Induction Cooktop</button>
+            <button onclick="renderCategory('air_purifier')">Air Purifier</button>
+            <button onclick="renderCategory('cookware')" disabled style="opacity: 0.5;">Cookware (Coming Soon)</button>
+            <button onclick="renderCategory('airFryer')" disabled style="opacity: 0.5;">Air Fryer (Coming Soon)</button>
+            <button onclick="renderCategory('Laptops')" disabled style="opacity: 0.5;">Laptops (Coming Soon)</button>
+        </aside> -->    
+
+        <main id="main-content">
+            <div class="welcome-screen">
+                <h2>Welcome to The Smart Pick</h2>
+                <p>What are you looking to buy today?</p>
+                <div id="category-grid-loading">
+                    <p>Loading Expert Guides...</p>
+                </div>
+                <!-- <p>Select a category from the left to explore your buying guide.</p>
+                <h2>Loading Categories...</h2> -->                
+            </div>
+        </main>
+    </div>
+
+    <div id="compare-overlay" class="hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="toggleCompare(false)">&times; Close</span>
+            <h3>Product Comparison</h3>
+            <div id="comparison-table-container"></div>
+        </div>
+    </div>
+    <script src="smartpick.js"></script>
+</body>
+</html>
+
+

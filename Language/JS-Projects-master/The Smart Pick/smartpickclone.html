@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Smart Pick</title>
+    <link rel="stylesheet" href="smartpickclone.css">
+</head>
+<body>
+
+<header>
+    <h1>THE SMART PICK</h1>
+    <p>Smart Guides for Smarter Purchases</p>
+</header>
+
+<div class="app-container">
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content">
+
+        <!-- HOMEPAGE -->
+        <section id="home-screen">
+            <h2>What do you want to buy?</h2>
+
+            <div class="category-grid">
+                <div class="category-card" onclick="loadCategory('induction')">
+                    <h3>Induction Cooktop</h3>
+                    <p>Best picks, buying guide & comparison</p>
+                </div>
+
+                <div class="category-card" onclick="loadCategory('air_purifier')">
+                    <h3>Air Purifier</h3>
+                    <p>Clean air solutions & expert picks</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY PAGE -->
+        <section id="category-screen" class="hidden">
+
+            <!-- BACK BUTTON -->
+            <button onclick="goHome()">⬅ Back</button>
+
+            <!-- TITLE -->
+            <h2 id="category-title"></h2>
+
+            <!-- RESEARCH / TRUST BOX -->
+            <div class="research-box">
+                <h3>Why Trust Our Picks?</h3>
+                <div class="pillar-grid">
+                    <div class="pillar">
+                        <span>📊</span>
+                        <p>Analyzed 1000+ Reviews</p>
+                    </div>
+                    <div class="pillar">
+                        <span>🧠</span>
+                        <p>Expert Comparison</p>
+                    </div>
+                    <div class="pillar">
+                        <span>🛠</span>
+                        <p>Real Usage Insights</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BUYING GUIDE -->
+            <div id="buying-guide" class="guide-box"></div>
+
+            <!-- FILTERS -->
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label>Budget:</label>
+                    <select id="budget-filter" onchange="applyFilters()">
+                        <option value="all">All</option>
+                        <option value="low">Under ₹3000</option>
+                        <option value="mid">₹3000 - ₹6000</option>
+                        <option value="high">Above ₹6000</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Type:</label>
+                    <select id="type-filter" onchange="applyFilters()">
+                        <option value="all">All</option>
+                        <option value="best">Best Overall</option>
+                        <option value="budget">Budget Pick</option>
+                        <option value="premium">Premium</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- PRODUCT GRID -->
+            <div id="product-grid" class="product-grid"></div>
+
+        </section>
+
+    </main>
+</div>
+
+<!-- COMPARE MODAL -->
+<div id="compare-overlay" class="hidden">
+    <div class="modal-content">
+        <span class="close-btn" onclick="toggleCompare(false)">&times; Close</span>
+        <h3>Product Comparison</h3>
+        <div id="comparison-table-container"></div>
+    </div>
+</div>
+
+<script src="smartpickclone.js"></script>
+</body>
+</html>

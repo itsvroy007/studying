@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f2f2f2;
+}
+
+.game_name{
+                background-color: black;
+                color: white;
+                align-content: center;
+                font-weight: bold;
+                font-style: normal;
+            }
+
+button {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+
+.buttons button {
+    width: 50px;
+}
+
+.hidden {
+    display: none;
+}
+
+#restart {
+    margin-top: 20px;
+}

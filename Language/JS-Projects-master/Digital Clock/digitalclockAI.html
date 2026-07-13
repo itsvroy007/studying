@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate Smart Clock</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial}
+
+body{
+    background:#020617;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+}
+
+.app{
+    width:95%;
+    max-width:1100px;
+    background:#0b1220;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 0 30px rgba(0,255,255,.15);
+}
+
+.tabs{
+    display:flex;
+    background:#000814;
+    overflow-x:auto;
+}
+
+.tabs button{
+    flex:1;
+    min-width:110px;
+    padding:12px;
+    border:none;
+    background:none;
+    color:#aaa;
+    cursor:pointer;
+}
+
+.tabs button.active{
+    background:#0284c7;
+    color:#fff;
+}
+
+.panel{
+    display:none;
+    padding:20px;
+    text-align:center;
+}
+
+.panel.active{display:block}
+
+.time{font-size:3.5rem}
+.date{opacity:.8;margin-bottom:10px}
+
+input,textarea,button{
+    padding:8px 12px;
+    border:none;
+    border-radius:6px;
+    margin:4px;
+    background:#020617;
+    color:#fff;
+}
+
+button{background:#0284c7;cursor:pointer}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    gap:10px;
+}
+
+.world,.card{
+    background:#020617;
+    padding:10px;
+    border-radius:8px;
+}
+
+.big{font-size:2.2rem}
+
+.list{text-align:left;margin-top:10px;font-size:14px}
+.list div{background:#020617;padding:6px;border-radius:5px;margin:4px 0}
+
+.calendar{
+    max-width:360px;
+    margin:auto;
+}
+
+.calendar header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.calendar table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.calendar th,.calendar td{
+    padding:6px;
+    text-align:center;
+}
+
+.calendar td.today{
+    background:#0284c7;
+    border-radius:6px;
+}
+
+.calendar td.event{
+    border:2px solid #22c55e;
+    border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="tabs">
+    <button class="active" onclick="showTab(0)">Clock</button>
+    <button onclick="showTab(1)">Alarms</button>
+    <button onclick="showTab(2)">Stopwatch</button>
+    <button onclick="showTab(3)">Timer</button>
+    <button onclick="showTab(4)">World</button>
+    <button onclick="showTab(5)">Calendar</button>
+    <button onclick="showTab(6)">Notes</button>
+</div>
+
+<div class="panel active">
+    <div class="time" id="clock"></div>
+    <div class="date" id="date"></div>
+</div>
+
+<div class="panel">
+    <h2>Multiple Alarms</h2><br>
+    <input type="time" id="alarmTime">
+    <button onclick="addAlarm()">Add Alarm</button>
+    <div class="list" id="alarmList"></div>
+</div>
+
+<div class="panel">
+    <h2>Stopwatch</h2><br>
+    <div class="big" id="stopwatch">00:00:00</div><br>
+    <button onclick="startSW()">Start</button>
+    <button onclick="stopSW()">Stop</button>
+    <button onclick="resetSW()">Reset</button>
+</div>
+
+<div class="panel">
+    <h2>Timer</h2><br>
+    <input type="number" id="tMin" placeholder="Min">
+    <input type="number" id="tSec" placeholder="Sec"><br>
+    <div class="big" id="timer">00:00</div><br>
+    <button onclick="startTimer()">Start</button>
+    <button onclick="resetTimer()">Reset</button>
+</div>
+
+<div class="panel">
+    <h2>World Clock</h2><br>
+    <div class="grid" id="world"></div>
+</div>
+
+<div class="panel">
+    <h2>Calendar + Event Reminder</h2><br>
+
+    <div class="calendar">
+        <header>
+            <button onclick="changeMonth(-1)">◀</button>
+            <h3 id="monthYear"></h3>
+            <button onclick="changeMonth(1)">▶</button>
+        </header>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th>
+                    <th>Thu</th><th>Fri</th><th>Sat</th>
+                </tr>
+            </thead>
+            <tbody id="calendarBody"></tbody>
+        </table>
+    </div>
+
+    <br>
+    <input type="date" id="eventDate">
+    <input type="text" id="eventText" placeholder="Event name">
+    <button onclick="addEvent()">Add Event</button>
+
+    <div class="list" id="eventList"></div>
+</div>
+
+<div class="panel">
+    <h2>Daily Notes</h2><br>
+    <input type="date" id="noteDate">
+    <textarea id="noteText" placeholder="Write your note..."></textarea>
+    <button onclick="saveNote()">Save Note</button>
+    <div class="list" id="noteList"></div>
+</div>
+
+</div>
+
+<script>
+/* TAB */
+const panels=document.querySelectorAll(".panel");
+const tabs=document.querySelectorAll(".tabs button");
+function showTab(i){
+    tabs.forEach(t=>t.classList.remove("active"));
+    panels.forEach(p=>p.classList.remove("active"));
+    tabs[i].classList.add("active");
+    panels[i].classList.add("active");
+}
+
+/* CLOCK */
+function updateClock(){
+    const d=new Date();
+    clock.textContent=d.toLocaleTimeString();
+    date.textContent=d.toDateString();
+}
+setInterval(updateClock,1000); updateClock();
+
+/* ALARMS */
+let alarms=JSON.parse(localStorage.getItem("alarms"))||[];
+
+function addAlarm(){
+    if(!alarmTime.value) return;
+    alarms.push(alarmTime.value);
+    localStorage.setItem("alarms",JSON.stringify(alarms));
+    renderAlarms();
+}
+function renderAlarms(){
+    alarmList.innerHTML="";
+    alarms.forEach((a,i)=>{
+        alarmList.innerHTML+=`<div>${a} <button onclick="delAlarm(${i})">X</button></div>`;
+    });
+}
+function delAlarm(i){
+    alarms.splice(i,1);
+    localStorage.setItem("alarms",JSON.stringify(alarms));
+    renderAlarms();
+}
+function playSound(){
+    const ctx=new AudioContext();
+    const osc=ctx.createOscillator();
+    osc.frequency.value=1000;
+    osc.connect(ctx.destination);
+    osc.start();
+    setTimeout(()=>osc.stop(),2000);
+}
+setInterval(()=>{
+    const now=new Date().toTimeString().slice(0,5);
+    if(alarms.includes(now)){
+        playSound();
+        alert("⏰ Alarm: "+now);
+    }
+},1000);
+renderAlarms();
+
+/* STOPWATCH */
+let sw=0,swInt;
+function startSW(){ if(!swInt) swInt=setInterval(()=>{sw++;displaySW()},1000); }
+function stopSW(){ clearInterval(swInt); swInt=null }
+function resetSW(){ sw=0; displaySW() }
+function displaySW(){
+    stopwatch.textContent=
+    `${String(Math.floor(sw/3600)).padStart(2,0)}:${String(Math.floor((sw%3600)/60)).padStart(2,0)}:${String(sw%60).padStart(2,0)}`;
+}
+
+/* TIMER */
+let timer=0,tInt;
+function startTimer(){
+    if(tInt) return;
+    timer=(+tMin.value||0)*60+(+tSec.value||0);
+    tInt=setInterval(()=>{
+        if(timer<=0){
+            clearInterval(tInt); tInt=null;
+            playSound(); alert("⏰ Timer Done!");
+            return;
+        }
+        timer--; displayTimer();
+    },1000);
+}
+function resetTimer(){ timer=0; displayTimer(); }
+function displayTimer(){
+    timerDisplay.textContent=
+    `${String(Math.floor(timer/60)).padStart(2,0)}:${String(timer%60).padStart(2,0)}`;
+}
+
+/* WORLD CLOCK */
+const cities=[
+["India","Asia/Kolkata"],["UAE","Asia/Dubai"],["USA","America/New_York"],
+["London","Europe/London"],["Australia","Australia/Sydney"],
+["Russia","Europe/Moscow"],["Japan","Asia/Tokyo"],
+["Korea","Asia/Seoul"],["China","Asia/Shanghai"]
+];
+function worldClock(){
+    world.innerHTML="";
+    cities.forEach(c=>{
+        const d=new Date().toLocaleString("en-US",{timeZone:c[1]});
+        world.innerHTML+=`<div class="world"><b>${c[0]}</b><br>${d}</div>`;
+    });
+}
+setInterval(worldClock,1000); worldClock();
+
+/* CALENDAR + EVENTS */
+let calDate=new Date();
+let events=JSON.parse(localStorage.getItem("events"))||[];
+
+function renderCalendar(){
+    const year=calDate.getFullYear();
+    const month=calDate.getMonth();
+    monthYear.textContent=calDate.toLocaleString("default",{month:"long",year:"numeric"});
+
+    let firstDay=new Date(year,month,1).getDay();
+    let lastDate=new Date(year,month+1,0).getDate();
+
+    let html="<tr>";
+    for(let i=0;i<firstDay;i++) html+="<td></td>";
+
+    for(let d=1;d<=lastDate;d++){
+        const dateStr=`${year}-${String(month+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+        let cls="";
+        let today=new Date();
+
+        if(d===today.getDate() && month===today.getMonth() && year===today.getFullYear())
+            cls+=" today";
+
+        if(events.some(e=>e.d===dateStr))
+            cls+=" event";
+
+        html+=`<td class="${cls}">${d}</td>`;
+        if((d+firstDay)%7===0) html+="</tr><tr>";
+    }
+    html+="</tr>";
+    calendarBody.innerHTML=html;
+}
+
+function changeMonth(n){
+    calDate.setMonth(calDate.getMonth()+n);
+    renderCalendar();
+}
+
+function addEvent(){
+    if(!eventDate.value || !eventText.value) return;
+    events.push({d:eventDate.value,t:eventText.value});
+    localStorage.setItem("events",JSON.stringify(events));
+    renderEvents();
+    renderCalendar();
+}
+
+function renderEvents(){
+    eventList.innerHTML="";
+    events.forEach(e=>{
+        eventList.innerHTML+=`<div>${e.d} → ${e.t}</div>`;
+    });
+}
+
+renderCalendar();
+renderEvents();
+
+/* NOTES */
+let notes=JSON.parse(localStorage.getItem("notes"))||[];
+function saveNote(){
+    if(!noteDate.value || !noteText.value) return;
+    notes.push({d:noteDate.value,t:noteText.value});
+    localStorage.setItem("notes",JSON.stringify(notes));
+    renderNotes();
+}
+function renderNotes(){
+    noteList.innerHTML="";
+    notes.forEach(n=>{
+        noteList.innerHTML+=`<div>${n.d}<br>${n.t}</div>`;
+    });
+}
+renderNotes();
+</script>
+
+</body>
+</html>
