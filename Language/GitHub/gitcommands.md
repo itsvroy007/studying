@@ -4,7 +4,7 @@
 git status 
 
 # to mention 
-git remote 
+git remote add orgin https://github.com/user_name/repo_name.git  
 
 # to add single or multiple files
 git add file1 file2 
