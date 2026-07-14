@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 
 export default function Github() {
+  
   const [data , setData] = useState([])
   useEffect(() => {
-    fetch('https://api.github.com/user/itsvroy007')
+    fetch('https://api.github.com/users/hiteshchoudhary')
     .then(response => response.json())
     .then(data => {
       setData(data)
@@ -13,7 +14,7 @@ export default function Github() {
   
   return (
     <> 
-    <div>
+    <div className='github-page'>
       <h1 className='github-fllw'>GitHub Followers: {data.followers}</h1>
       <img className='github-pic' src={data.avatar_url} alt="Git picture" />
     </div>

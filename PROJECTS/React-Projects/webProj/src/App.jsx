@@ -7,22 +7,24 @@ import Github from './components/Github/Github.jsx'
 import About from './components/About/About.jsx'
 import './App.css'
 import User from './components/User/User.jsx'
+import Layout from './Layout.jsx'
 
 function App() {
   return (
     <>
-      <Header />
-      <h1>Web Page</h1>
+      
+      <h1>Dummy web site</h1>
       <Routes>
+        <Route path='/' element={<Layout />} >
           <Route path='' element={<HomePage />}></Route>
           <Route path='/about' element={<About  />}></Route>
           <Route path='/contact' element={<Contact  />}></Route>
           <Route path='/github' element={<Github />}></Route>
           <Route path='/user/:userid' element={<User />}></Route>
+        </Route>
       </Routes>
-      <Footer />
+      
     </>
-          //<Route path='/' element={<Layout />} ></Route>
   )
 }
 
