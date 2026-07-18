@@ -23,6 +23,7 @@ export default function Login() {
         value={username}
         onChange={(event) => {setUsername(event.target.value)}}
         />
+        <br />
         <input 
         type="password" 
         placeholder="Password" 
