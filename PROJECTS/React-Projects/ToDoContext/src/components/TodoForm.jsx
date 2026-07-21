@@ -9,9 +9,10 @@ function TodoForm() {
   const {addTodo} = useToDo()
 
   const add = (e) => {
-    e.preventdefault()
+    e.preventDefault()
 
     if (!todo) return
+    
     addTodo({todo:todo ,completed:false})
     setTodo("")
     // passing an object in addtodo and  
