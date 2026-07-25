@@ -45,9 +45,8 @@ int perimeterAndAreaOfFigures(){
     cout<<"area of triangle is "<< (float)(base*height)/2 <<endl;
     //cout<<"perimeter of triangle is "<< side1+side2+side3 <<endl;
     }
-
     else cout<<"wrong choice"<<endl;
-
+    return 0;
 }
 
 int simpleInterest(){
@@ -60,6 +59,7 @@ int simpleInterest(){
     cin>>t;
     cout<<"\nsimple interest is: "<<(p*r*t)/100;
     cout<<"\namount to be paid :"<< p + (p*r*t)/100<<endl; 
+    return 0;
 }
 
 int oddEven(){
@@ -70,7 +70,7 @@ int oddEven(){
         cout<<"entered num is even"<<endl;
     }
     else cout<<"entered num is odd";
-
+    return 0;
 }
 
 int absoluteNum(){
@@ -83,6 +83,7 @@ int absoluteNum(){
         cout<<"absolute num1 is :"<< -(num1)<<endl;
     }
     else cout<<"absolute num1 is :"<<num1<<endl;
+    return 0;
 }
 
 int profitloss(){
@@ -102,6 +103,7 @@ int profitloss(){
         cout<<"loss percentage is "<< (loss/cp)*100<<endl;
     }
     else cout<<"no loss no profit";
+    return 0;
 }
 
 int validTriangle(){
@@ -117,6 +119,7 @@ int validTriangle(){
         cout<<"it is a valid triangle\n";
     }
     else cout<<"invalid triangle";
+    return 0;
 }
 
 int greatestNum(){ // for least just change > to < less than symbol
@@ -139,6 +142,7 @@ int greatestNum(){ // for least just change > to < less than symbol
     else if(num1==num2 and num1==num3){
         cout<<"all num are equal\n";
     }
+    return 0;
 }
 
 int grading(){
@@ -158,6 +162,7 @@ int grading(){
         cout<<"Grade D \n Fail";
     }
     else cout<<"wrong input";
+    return 0;
 }
 
 int quadrant(){
@@ -178,13 +183,14 @@ int quadrant(){
     else if(x<0 and y<0){
         cout<<"4nd quadrant";
     }
-    else if(x=0){
+    else if(x==0){
         cout<<"point is on y-axis";
     }
-    else if(y=0){
+    else if(y==0){
         cout<<"point is on x-axis";
     }
     else cout<<"point is on origin";
+    return 0;
 }
 
 int switchCalc(){
@@ -215,6 +221,7 @@ int switchCalc(){
         default :
             cout<<"invalid input";
     }
+    return 0;
 }
 
 int table(){
@@ -224,6 +231,7 @@ int table(){
     for(int i=1;i<11;i++){
         cout<<num<<" x "<<i<<" = "<<num*i<<endl;
     }
+    return 0;
 }
 
 int displayOfAP(){
@@ -244,6 +252,7 @@ int displayOfAP(){
         cout<<i<<" ";
     }
     */
+    return 0;
 }
 
 int displayOfGP(){
@@ -259,6 +268,7 @@ int displayOfGP(){
         cout<<temp<<" ";
         temp=temp*comm_ratio;
     }
+    return 0;
 }
 
 int factorsOfNum(){
@@ -273,6 +283,7 @@ int factorsOfNum(){
         factor=i;
     }
     cout<<"\nThe 2nd highest factor is :"<<factor;
+    return 0;
 }
 
 int is_CompositeOrPrime(){
@@ -291,7 +302,7 @@ int is_CompositeOrPrime(){
         else cout<<"it is a prime num"<<endl;
         break;
     }
-    
+    return 0;
 } 
 
 int countDigit(){
@@ -304,6 +315,7 @@ int countDigit(){
         count++;
     }
     cout<<"the total digit in num is :"<<count;
+    return 0;
 }
 
 int sumOfDigit(){
@@ -317,6 +329,7 @@ int sumOfDigit(){
         num=num/10;
     }
     cout<<"the sum of digit of num is :"<<sum;
+    return 0;
 }
 
 int productOfDigit(){
@@ -351,11 +364,13 @@ int reverseNum(){
     if(temp_num == rev){
         cout<<"it is a palindrome"<<endl;
     }
+    return 0;
 }
 
 int factorial(int num){
     if (num==0 or num ==1 ) return 1;
     return num * factorial(num-1);
+    return 0;
 }
 
 int AsciiValue(){
@@ -363,6 +378,7 @@ int AsciiValue(){
     for(int i=65;i<=122;i++){
         cout<<"Ascii vale of "<<(char)i<<" is "<<i<<endl;
     }
+    return 0;
 }
 
 int swapTwoNum(){
@@ -385,6 +401,7 @@ int swapTwoNum(){
     cout<<"num1 is :"<<num1<<endl;
     cout<<"num2 is :"<<num2<<endl;
     return 0;
+    return 0;
 }
 
 int PnC(){
@@ -399,6 +416,7 @@ int PnC(){
     int combination = permutation / factorial(r) ;
     cout<<"the permutation of n and r is "<<permutation<<endl;
     cout<<"the combination of n and r is "<<combination<<endl;
+    return 0;
 }
 
 int SumOfNaturalNum(int num){
@@ -406,7 +424,7 @@ int SumOfNaturalNum(int num){
     if (num == 1) return 1;
     return num + SumOfNaturalNum(num-1);
     // sum =0 for(int i =1;i<=num;i++) sum=sum+i  
-
+    return 0;
 }
 
 int power(int a,int b){
@@ -414,6 +432,7 @@ int power(int a,int b){
     if(b==0) return 1;    
     return a*power(a,b-1);
     // loops -> output=1 for(int i=b;i>0;i--) output= ouput*a
+    return 0;
 }
 
 int fibonnaciSeries(){
@@ -429,12 +448,14 @@ int fibonnaciSeries(){
         b=sum;
         sum=a+b;
     }
+    return 0;
 }
 
 int fibo(int n_term){
     // to print nth term of fibo
     if(n_term==1 or n_term==2) return 1;
     return fibo(n_term-1)+fibo(n_term-2);
+    return 0;
 }
 
 int arrElemSum(int arr[],int size){
@@ -482,6 +503,7 @@ int squareElemArr(int size){
     for(int i=0;i<=size-1;i++){
         cout<<arr[i]<<" ";
     }
+    return 0;
 }
 
 
