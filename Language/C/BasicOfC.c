@@ -74,6 +74,7 @@ int fact_num(){
         fact = fact *i;   
     }
     printf("fact of the num is %d",fact);
+    return 0;
 }
 
 int sum_naturalnum(){
@@ -88,15 +89,16 @@ int sum_naturalnum(){
     output = (num*(num+1))/2; // output= n*n
     printf("sum of n natural num is:%d\n",sum);
     printf("output is %d",output);
+    return 0;
 }
 
 int temp(){
-
-
+    printf("hello");
+    return 0;
 }
 
 
 int main(){
-    
+    temp();
     return 0;
 }
