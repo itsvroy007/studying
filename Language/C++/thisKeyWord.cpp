@@ -21,6 +21,10 @@ public:
   void printDetails(){ // here this-> is used to specify the prop 
     cout<< this->name << '\n' << this->runs  << '\n' << this->avg <<endl; 
   }
+
+  int matches(){
+    return runs/avg;
+  }
 };
 
 
