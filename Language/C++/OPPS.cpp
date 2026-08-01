@@ -1,6 +1,19 @@
 #include <iostream>
 using namespace std;
 
+/* 4 core parts of oops [object oriented programming]
+1. Classes and objects [ abstraction]
+2. Encapsulation -> data/prop + member function within a class 
+3. Inheritence
+4. polymorphism
+
+  access modifier 
+1. public
+2. private -> data hiding
+3. protected
+*/
+
+
 class Student{ // student is a new datatype and name,rno,gpa is its props 
 public: 
   string name;
@@ -9,10 +22,11 @@ public:
   int age;
   
   // default constructor -> dot operator if any constructor is defined then default constructor not work
+  // they dont have nany return type
   Student(){
   
   }
-  // multiple constructir can be made either 1 param,2 param or 3 or 4 param
+  // multiple constructor can be made either 1 param,2 param or 3 or 4 param
 
   // creating constructor -> a function which doesnot have any return datatype 
   Student(string s, int r, float g , int a){ // parameterised constructor
@@ -30,11 +44,42 @@ void printDetails(Student s){
   cout<<"Student age: "<<s.age<<endl;
 }
 
+class Teacher{
+private:
+  double salary; // props which cant be accessed
+public:
+  // props or attributes 
+  string name;
+  string dept;
+  string sub;
+
+  //constructor -> always to be public
+  Teacher(){
+    // dept = "CS"; assingn all obj dept to be CS
+  }
+
+  // methods or member function -> mem of class
+  void changeDept(string newDept){
+    dept = newDept;
+  }
+  // setter
+  void setSalary(double s){
+    salary=s;
+  }
+  // getter
+  double getSalary(){
+    return salary;
+  }
+};
+
+
+
+
 int main(){
   
   printf("hello , nice to meet u");
   
-  Student s1; // student is class while s1 is obj[declarartion]
+  Student s1; // student is class while s1 is obj[declarartion] and it will call the default constructor
   s1.name="Raghav";
   s1.rno=76;
   s1.gpa=8.7;

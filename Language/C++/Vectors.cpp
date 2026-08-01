@@ -24,7 +24,7 @@ void VectorBasics(){
 }
 
 class Vector{
-public:
+public: 
   int size;
   int capacity;
   int* arr; // pointer array
@@ -53,6 +53,24 @@ public:
     }
     cout<<endl;
   }
+  int get(int index){
+    if (size==0){
+      cout<<"Arr is empty"<<endl;
+      return -1;
+    }
+    if (index>=size || index<0){
+      cout<<"Invalid index"<<endl;
+      return -1;
+    }
+    return arr[index];
+  }
+
+  void remove(){
+    if (size==0){
+      cout<<"Arr is empty"<<endl;
+    }
+    size--;
+  }
 };
 
 
@@ -63,7 +81,7 @@ int main(){
   Vector v;
 
   cout<<v.size<<" "<<v.capacity<<endl;
-  v.add(5);
+  v.add(5);// elem added and capacity is doubled 
   v.printElem();
   cout<<v.size<<" "<<v.capacity<<endl;
   v.add(10);
