@@ -8,7 +8,7 @@ using namespace std;
 4. polymorphism
 
   access modifier 
-1. public
+1. public -> data for accessable to all
 2. private -> data hiding
 3. protected
 */
@@ -21,7 +21,7 @@ public:
   float gpa;
   int age;
   
-  // default constructor -> dot operator if any constructor is defined then default constructor not work
+  // default constructor -> dot operator if any constructor is defined then default constructor not work , if constructor in private then it would be inaccessable
   // they dont have nany return type
   Student(){
   
@@ -45,8 +45,8 @@ void printDetails(Student s){
 }
 
 class Teacher{
-private:
-  double salary; // props which cant be accessed
+private: // cant use / access
+  double salary; // props which cant be accessed but it value can be set within constructor and it accessable in function member
 public:
   // props or attributes 
   string name;
@@ -62,11 +62,11 @@ public:
   void changeDept(string newDept){
     dept = newDept;
   }
-  // setter
+  // setter -> to set/change value in private member
   void setSalary(double s){
     salary=s;
   }
-  // getter
+  // getter -> to retrive value of private member 
   double getSalary(){
     return salary;
   }
@@ -100,7 +100,7 @@ int main(){
   s5.name="Ankit";
   s5.rno=77;
 
-
+  
   printDetails(s1);
   printDetails(s2);
   printDetails(s3);
