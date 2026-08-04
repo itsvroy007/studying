@@ -53,6 +53,7 @@ public:
     }
     cout<<endl;
   }
+
   int get(int index){
     if (size==0){
       cout<<"Arr is empty"<<endl;
@@ -69,7 +70,7 @@ public:
     if (size==0){
       cout<<"Arr is empty"<<endl;
     }
-    size--;
+    size--; // no need to remove the particular elem just adjust the size
   }
 };
 
