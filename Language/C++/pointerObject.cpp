@@ -23,7 +23,7 @@ public:
 
   void change(Cricketer* c){
     c->avg=68.9; // -> means this (*c).avg = 77.2;
-    // passing 
+    // passing value to address to change value 
   }
 
 };
