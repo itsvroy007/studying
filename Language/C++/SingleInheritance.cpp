@@ -19,15 +19,15 @@ public:
 
 class Car : public Vehicle{
 public:
+  int price;
   string type; // suv hatchback sedan
 };
 
-class Scooty{ // derived
+class Scooty : public Vehicle{ // derived
 public:
-  int topSpeed;
-  float mileage;
+  int price;
 private:
-  int bootSpace;
+  int bootSpace; // storange volume
 };
 
 class Bike : public Scooty{ // : -> extends take all member of scooty it is derived/child class [ vehicle -> scooty -> bike ] multi lvl inherihtance
@@ -46,6 +46,7 @@ public:
     cout<<"TopSpeed :"<<b.topSpeed<<endl;
     cout<<"Mileage :"<<b.mileage<<endl;
     cout<<"Gears :"<<b.gears<<endl;
+    
   }
 };
 
