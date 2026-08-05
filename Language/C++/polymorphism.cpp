@@ -7,10 +7,16 @@ like a person can your -> friend , parent[mother , father], bro/sis , son/daugth
 
 errors 
 1. complie time error -> syntactical errors like missing out ; ( ) bracket etc
-2. runtime erroe -> div by 0 , index negatuve , out of bound index
-*/
+2. runtime error -> div by 0 , index negatuve , out of bound index
 
-// function overloading -> same function using with different params or diff datatype , it would be not funct overloading if function is off diff data type
+function overloading -> same function using with different no. of params or diff param datatype , it would be not funct overloading if function is off diff data type
+
+operator overloading -> same operator being used to perform diff operation 
+operator overloading -> using same operator which perform diff operation on operands like 3+ 8 = 11 but "3" + "8" = 28 as + in int give sum but + in str performs appends
+
+Virtual Funct and over riding -> runtime polymorphism
+
+*/
 
 class Loading{
 public:
@@ -25,14 +31,15 @@ public:
   void sum(string a , string b){
     cout<<a+b<<endl;
   }
-  /* error due to diff return type
+  /* 
+  error due to diff return type
   int sum(int a , int b){
-    cout<<a+b<<endl;
+    return a+b;
   }
   */
 };
 
-// operator overloading -> using same operator which perform diff on operands like 3+ 8 = 11 but "3" + "8" = 28 as + in int give sum but + in str performs appends
+
 
 class Fraction{
 public:
@@ -48,12 +55,67 @@ public:
   }
   
   Fraction add(Fraction f){
-    
+    int newNum = (this->num*f.den + this->den*f.num );
+    int newDen = (this->den*f.den);
+    Fraction ans(newNum,newDen);
+    return ans;
   }
+  Fraction operator+(Fraction f){ // defing the operation for + operator
+    int newNum = (this->num*f.den + this->den*f.num );
+    int newDen = (this->den*f.den);
+    Fraction ans(newNum,newDen);
+    return ans;
+  }
+
+  Fraction operator-(Fraction f){ // defing the operation for - operator
+    int newNum = (this->num*f.den - this->den*f.num );
+    int newDen = (this->den*f.den);
+    Fraction ans(newNum,newDen);
+    return ans;
+  }
+
+  Fraction operator*(Fraction f){ // defing the operation for * operator
+    int newNum = (this->num*f.num );
+    int newDen = (this->den*f.den);
+    Fraction ans(newNum,newDen);
+    return ans;
+  }
+
+  Fraction operator/(Fraction f){ // defing the operation for / operator
+    int newNum = (this->num*f.den);
+    int newDen = (this->den*f.num);
+    Fraction ans(newNum,newDen);
+    return ans;
+  }
+
+  Fraction simplify(){ // function for simplify
+    int newNum = this->num;
+    int newDen = this->den;
+    int max;
+    if(newNum >= newDen) max = newNum;
+    else max = newDen;
+
+    for(int i=1;i<=max;i++){
+        if(newNum%i ==0 && newDen % i ==0){
+          newNum = newNum / i;
+          newDen = newDen / i;
+          
+        }
+      }
+      Fraction f(newNum , newDen);
+      f.display();
+
+    }
 };
 
 int main(){
   Fraction f1(1,2);
+  Fraction f2(2,3);
   f1.display();
+  f2.display();
+  // Fraction f3 = f1.add(f2);
+  Fraction f3 = f1 * f2;
+  f3.simplify();
+  f3.display();
   return 0;
 }
