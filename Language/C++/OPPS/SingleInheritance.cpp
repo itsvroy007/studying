@@ -11,6 +11,7 @@ Multi lvl -> grandchild -> parent -> grandParent
 
 class Vehicle{ // parent class
 public:
+  float price;
   int topSpeed;
   float mileage;
   string fuel;
@@ -19,13 +20,12 @@ public:
 
 class Car : public Vehicle{
 public:
-  int price;
   string type; // suv hatchback sedan
 };
 
 class Scooty : public Vehicle{ // derived
 public:
-  int price;
+  string cmpyName;
 private:
   int bootSpace; // storange volume
 };
