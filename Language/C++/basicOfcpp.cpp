@@ -67,7 +67,6 @@ int swapTwoNum(){
     cout<<"num1 is :"<<num1<<endl;
     cout<<"num2 is :"<<num2<<endl;
     return 0;
-    return 0;
 }
 
 

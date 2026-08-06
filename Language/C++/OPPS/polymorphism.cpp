@@ -15,7 +15,7 @@ operator overloading -> same operator being used to perform diff operation
 operator overloading -> using same operator which perform diff operation on operands like 3+ 8 = 11 but "3" + "8" = 28 as + in int give sum but + in str performs appends
 
 Virtual Funct and over riding -> runtime polymorphism
-over riding -> 
+over riding -> same function from parent class used in children class but which can be modify
 */
 
 class Loading{
@@ -88,25 +88,27 @@ public:
     return ans;
   }
 
-  Fraction simplify(){ // function for simplify
+  int gcd(int num1,int num2){
+    int rem;
+    rem = num1%num2;
+    if(rem == 0){
+      return num2;
+    }
+    return gcd(num2,rem);
+  }
+
+  void simplify(){ // function for simplify
     int newNum = this->num;
     int newDen = this->den;
-    int max;
-    if(newNum >= newDen) max = newNum;
-    else max = newDen;
-
-    for(int i=1;i<=max;i++){
-        if(newNum%i ==0 && newDen % i ==0){
-          newNum = newNum / i;
-          newDen = newDen / i;
-          
-        }
-      }
-      Fraction f(newNum , newDen);
-      f.display();
-
+    int hcf;
+    hcf = gcd(newNum,newDen);
+    newNum /= hcf; 
+    newDen /= hcf;
+    cout<<newNum << "/" << newDen<<endl;
     }
 };
+
+
 
 int main(){
   Fraction f1(1,2);
@@ -115,7 +117,8 @@ int main(){
   f2.display();
   // Fraction f3 = f1.add(f2);
   Fraction f3 = f1 * f2;
-  f3.simplify();
   f3.display();
+  f3.simplify();
+  
   return 0;
 }
