@@ -40,7 +40,6 @@ public:
 };
 
 
-
 class Fraction{
 public:
   int num;
@@ -108,17 +107,42 @@ public:
     }
 };
 
+class Scooty{
+public:
+  int topSpeed;
+  int mileage;
+  virtual void sound(){ // using virtual -> accessing scoty memory for other class funct msg
+    cout<<"vrommmm vrommm"<<endl;
+  }
+};
 
+class Bike : public Scooty{
+public:
+  int gears;
+  void sound(){
+    cout<<"dhromm dhromm"<<endl;
+  }
+};
+
+class SuperBike : public Scooty{
+public:
+  void sound(){
+    cout<<"Zroom Zroom"<<endl;
+  }
+};
 
 int main(){
   Fraction f1(1,2);
   Fraction f2(2,3);
-  f1.display();
-  f2.display();
   // Fraction f3 = f1.add(f2);
   Fraction f3 = f1 * f2;
   f3.display();
   f3.simplify();
   
+  Scooty* b = new Bike();
+  b->sound();
+  Scooty* c = new SuperBike();
+  c->sound();
+
   return 0;
 }
