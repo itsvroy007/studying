@@ -15,7 +15,7 @@ operator overloading -> same operator being used to perform diff operation
 operator overloading -> using same operator which perform diff operation on operands like 3+ 8 = 11 but "3" + "8" = 28 as + in int give sum but + in str performs appends
 
 Virtual Funct and over riding -> runtime polymorphism
-over riding -> same function from parent class used in children class but which can be modify
+over riding -> same name function from parent class used in diff child class but which can be modify
 */
 
 class Loading{
