@@ -3,8 +3,7 @@
 // arr -> storing same data type value in an order
 // index start from 0 to n-1 (NO -ve indexing)
 // contiuous memory allocation
-int arr_intro()
-{
+int arr_intro(){
   int price[3]; // price[3]={10,20,30}; same meaning
   printf("enter item1 price:\n");
   scanf("%d", &price[0]);
@@ -18,47 +17,40 @@ int arr_intro()
   return 0;
 }
 
-int arr_in_out()
-{
+int arr_in_out(){
   int num_size;
   printf("enter size of arr: ");
   scanf("%d", &num_size);
   int arr[num_size];
   printf("entering value : ");
-  for (int i = 0; i < num_size; i++)
-  {
+  for (int i = 0; i < num_size; i++){
     scanf("%d", &arr[i]);
   }
   printf("\nprinting elem of arr : ");
   printf("[");
-  for (int i = 0; i < num_size; i++)
-  {
+  for (int i = 0; i < num_size; i++){
     printf("%d ", arr[i]);
   }
   printf("]");
   printf("\nprinting reverse arr: ");
   printf("[");
-  for (int i = num_size - 1; i >= 0; i--)
-  {
+  for (int i = num_size - 1; i >= 0; i--){
     printf("%d ", arr[i]);
   }
   printf("]");
   return 0;
 }
-int arr_elem_sum_prod()
-{
+int arr_elem_sum_prod(){
   int len, sum = 0, prod = 1;
   printf("enter len of arr :  ");
   scanf("%d", &len);
   int arr1[len];
   printf("enter %d elem ", len);
-  for (int i = 0; i < len; i++)
-  {
+  for (int i = 0; i < len; i++){
     // printf("enter the %d pos in arr: ",i);
     scanf("%d", &arr1[i]);
   }
-  for (int i = 0; i < len; i++)
-  {
+  for (int i = 0; i < len; i++){
     sum = sum + arr1[i];
     prod = prod * arr1[i];
     // printf("%d ",arr1[i]);
@@ -68,20 +60,16 @@ int arr_elem_sum_prod()
   return 0;
 }
 
-int count_odd_elem()
-{ // take an elem from user & compare with elem of arr in count loop
+int count_odd_elem(){ // take an elem from user & compare with elem of arr in count loop
   int count = 0;
   int arr[10];
-  for (int i = 0; i < 10; i++)
-  {
+  for (int i = 0; i < 10; i++){
     printf("enter your elem:");
     scanf("%d\n", &arr[i]);
   }
   // loop for count odd elem
-  for (int i = 0; i < 10; i++)
-  {
-    if (arr[i] % 2 != 0)
-    {
+  for (int i = 0; i < 10; i++){
+    if (arr[i] % 2 != 0){
       count = count + 1; // or use count++;
     }
   }
@@ -89,8 +77,7 @@ int count_odd_elem()
   return 0;
 }
 
-int arr_max_min_elem()
-{
+int arr_max_min_elem(){
   int n, i;
   printf("Enter size of array: ");
   scanf("%d", &n);
