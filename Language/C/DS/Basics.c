@@ -87,16 +87,10 @@ int series(int init,int end){
   return series(init+1,end);
 }
 
-struct nodes
-{
-  int data;
-  struct node *next;
-  
-  
-};
+
 
 
 int main(){
-  series(1,5);
+  
   return 0;
 }
