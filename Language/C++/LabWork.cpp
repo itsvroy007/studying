@@ -2,6 +2,8 @@
 #include <string.h>
 using namespace std;
 
+/* lab prog 1 Cab booking using functions 
+
 string CustName;
 string PickUpLoc;
 string dest;
@@ -23,22 +25,22 @@ void EnterDetails(){
 }
 
 void CarBooking(){
-    
+
     cout<<"cab type:"<<endl;
     cout<<"1.Mini    --10 per km "<<endl;
     cout<<"2.GO      --15 per km"<<endl;
     cout<<"3.Sedan   --20 per km"<<endl;
     cout<<"4.SUV     --25 per km"<<endl;
     cout<<"5.Luxuary --30 per km"<<endl;
-    
+
     cout<<"Enter your choice (enter 1-5): ";
     cin>>choice;
-    
+
     if(choice == 1){
         carType = "Mini";
         fare = tripDistance * 10;
         printf("You have selected Mini cab.");
-        
+
     }
     else if(choice == 2){
         carType = "Go";
@@ -77,7 +79,7 @@ void displayInfo(){
 int main(){
   EnterDetails();
   CarBooking();
-  displayInfo();  
+  displayInfo();
   string confirmation;
   cout<<"CONFIRM BOOKING - Y or N"<<endl;
   cin>>confirmation;
@@ -85,5 +87,117 @@ int main(){
   else cout<<"Booking Not Confirmed"<<endl;
   return 0;
 }
+  */
 
+/* lab pro 2 Matrix Multiplication
+class Matrix{
+private:
+  int mat[10][10];
+  int rows;
+  int cols;
+
+public:
+  void input(){
+    cout << "Enter rows: ";
+    cin >> rows;
+    cout << "Enter cols: ";
+    cin >> cols;
+    cout << "Enter elem in matrix: \n";
+    for (int i = 0; i < rows; i++){
+      for (int j = 0; j < cols; j++){
+        cin >> mat[i][j];
+      }
+    }
+  }
+
+  void display(){
+    cout << "Display of matrix:\n";
+    for (int i = 0; i < rows; i++){
+      for (int j = 0; j < cols; j++){
+        cout << mat[i][j];
+      }
+      cout << endl;
+    }
+  }
+
+  Matrix Multiply(Matrix B){
+    Matrix result;
+    result.rows = rows;
+    result.cols = B.cols;
+    if (rows == B.cols){
+      for (int i = 0; i < rows; i++){
+        for (int j = 0; j < B.cols; j++){
+          result.mat[i][j] = 0;
+          for (int k = 0; k < cols; k++){
+            result.mat[i][j] = result.mat[i][j] + (mat[i][k] * B.mat[k][j]);
+          }
+        }
+      }
+    }
+    return result;
+  }
+};
+
+int main(){
+  Matrix A;
+  cout << "Enter mat A :" << endl;
+  A.input();
+  cout << "display of mat A: " << endl;
+  A.display();
+  Matrix B;
+  cout << "Enter mat B :" << endl;
+  B.input();
+  cout << "display of mat B: " << endl;
+  B.display();
+  cout << "Result matrix: " << endl;
+  Matrix result = A.Multiply(B);
+  result.display();
+  return 0;
+}
+
+*/
+
+
+// lab prog 3 to perform addition of two complex numbers using constructor overloading.
+/*
+class ComplexNum{
+private:
+  double real;
+  double imag;
+public:
+  ComplexNum(){
+
+  }
+  ComplexNum(double num){
+    real = imag = num;
+  }
+  ComplexNum(double real,double imag){
+    this->real = real;
+    this->imag = imag;
+  }
+
+  ComplexNum add(ComplexNum C){
+    ComplexNum result;
+    result.real = real + C.real;
+    result.imag = imag + C.imag;
+    return result;
+  }
+  void display(){
+    cout<<"Real part is: "<<real<<endl;
+    cout<<"Imag part is: "<<imag<<endl;
+    cout<<"Complex num is: "<<real<<" + "<<imag<<"i"<<endl;
+    return ;
+  }
+};
+
+int main(){
+  ComplexNum c1(5.5);
+  c1.display();
+  ComplexNum c2(5.6,9.7);
+  c2.display();
+  ComplexNum c3 = c1.add(c2);
+  c3.display();
+  return 0;
+}
+*/
 
