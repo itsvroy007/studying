@@ -2,7 +2,61 @@
 #include<string.h>
 using namespace std;
 
-class Rectangle{
+
+class Shape{
+public:
+  Shape(){
+
+  }
+  float Area(){
+    return 0;
+  }
+  
+};
+
+class Square : public Shape{
+private:
+  float side;
+public:
+  Square(){
+  }
+  Square(float s);
+  float Area(float side){
+    return side*side;
+  }
+  float Perimeter(float side){
+    return 4*side;
+  }
+};
+
+class Triangle : public Shape{
+private:
+  float base;
+  float height;
+public:
+  Triangle(){}
+  Triangle(float base,float height);
+  float Area(float b,float h){
+    return (b*h)/2;
+  }
+  float Perimter(float s1,float s2,float s3){
+    return s1+s2+s3;
+  }
+  void Type(float s1,float s2,float s3){
+    if(s1 == s2 || s2 == s3 || s1==s3){
+      cout<<"Isosceles triangle"<<endl;
+    }
+    else if( s1 == s2 == s3){
+      cout<<"Equivalent Triangle"<<endl;
+    }
+    else{
+      cout<<"Scalene Triangle"<<endl;
+    }
+  }
+};
+
+
+class Rectangle : public Shape{
 public:
   int len,bred;
   Rectangle(){
@@ -32,17 +86,19 @@ public:
 };
 
 
-
-class Circle{
+class Circle : public Shape{
 private:
   double radius;
 public:
-  float pi= 3.14159;
+  const float pi= 3.14159;
 
-  double get_area(double radius){
+  double Area(double radius){
     double area = (double) pi * radius*radius;
     cout<<"Area: "<<area<<endl;
     return area;
+  }
+  float Circumference(float radius){
+    return 2*pi*radius;
   }
   void setRadius(double r){
     radius = r;
@@ -57,7 +113,7 @@ private:
   int day,month,year;
 public:
   Date(){
-
+    
   }
   
   void setDay(int d){// setting vallue in private member 
@@ -77,6 +133,31 @@ public:
   }
   int getYear(){
     return year;
+  }
+  bool IsValidDate(){
+    if(month<1 || month >12 ){
+      return false;
+    }
+    if (day <1 || day >31){
+      return false;
+    }
+    if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30){
+      return false;
+    }
+    if (month == 2) {
+      // Check for leap year
+      if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+        if (day > 29){
+          return false;
+        }
+        else {
+          if (day > 28){
+            return false;
+          }
+        }
+      } 
+    }
+    return true;
   }
   /*
   Date d1;
@@ -227,7 +308,6 @@ private:
   int year;
 public:
   Vehicle(){
-
   }
   Vehicle(int year){
     this->year = year;
@@ -236,11 +316,13 @@ public:
     cout<<"Vehicle ("<<year<<")is moving."<<endl;
   }
 };
+
 class Car : public Vehicle{
 private:
   int year;
   string mfg;
   string model;
+  int numOfDoor;
 public:
   int price;
   Car(){
@@ -261,6 +343,12 @@ public:
   int getYear(){
     return year;
   }
+  string getMfg(){
+    return mfg;
+  }
+  string getModel(){
+    return model;
+  }
 
   void displayInfo(){
     cout<<year<<" "<<mfg<<" "<<model;
@@ -275,20 +363,9 @@ public:
     cin>>model;
     cout<<year<<" "<<mfg<< " "<<model<<" engine strted"<<endl;
   }
-  /*
-  Car c(2018,"Honda","Civic");
-  cout<<"Car was mfg in : "<<c.getYear()<<endl;
-  cout<<"Changing car details"<<endl;
-  c.setMfg("Maruti");
-  c.displayInfo();
-  */
 
-
-private:
-  int numOfDoor;
-public:
   Car(int year ,int numOfDoor){
-    Vehicle(year);
+    //Vehicle(year);
     this->numOfDoor=numOfDoor;
   }
   void setNumOfDoor(int n){
@@ -297,7 +374,15 @@ public:
   void openDoor(){
     cout<<"Car with "<<numOfDoor<<"doors opened"<<endl;
   }
+  /*
+  Car c(2018,"Honda","Civic");
+  cout<<"Car was mfg in : "<<c.getYear()<<endl;
+  cout<<"Changing car details"<<endl;
+  c.setMfg("Maruti");
+  c.displayInfo();
+  */
 };
+
 class SuperCar : public Car{
 private:
   int maxSpeed;
@@ -315,11 +400,127 @@ public:
   void activated_turbo(){
     cout<<"Sports Car turbo activated! Max Speed: "<<maxSpeed<<" mph"<<endl;
   }
-};  
-
-int main(){
+  /*
   SuperCar ferrari(2023,2,210);
   ferrari.strt_trans();
   ferrari.openDoor();
-  ferrari.activated_turbo();
+  ferrari.activated_turbo(); // there are some error
+  */
+}; 
+
+class Person{
+private:
+  string name;
+  int age;
+  string country;
+public:
+  Person(){
+  }
+  Person(string name,int age,string country);
+  
+  void setName(string n){
+    name = n;
+  }
+  void setAge(int a){
+    age = a;
+  }
+  void setCountry(string c){
+    country = c;
+  }
+  string getName(){
+    return name;
+  } 
+  int getAge(){
+    return age;
+  }
+  string getCountry(){
+    return country;
+  }
+  void display(){
+    cout<<"Name: "<<name<<endl;
+    cout<<"Age: "<<age<<endl;
+    cout<<"Country: "<<country<<endl;
+  }
+};
+
+
+
+class SerialGenrator{
+private:
+  int serialNum;
+public:
+  SerialGenrator(){
+  }
+
+  SerialGenrator(int s){
+    serialNum = s;
+  }
+  void setSerialNum(int s){
+    serialNum = s;
+  }
+  
+  void getSerial(){
+    cout<<serialNum++<<endl;
+    return;
+    //return serialNum++;
+  }
+  /*
+  SerialGenrator s1(1000);
+  for(int i=1;i<5;i++){
+    s1.getSerial();
+  } 
+  */
+};
+
+class Student{
+private:
+  string name;
+  string studclass;
+  int rollNum;
+  float marks;
+public:
+  Student(){}
+  Student(string n,string sc,int rno,float m){
+    name =n;
+    studclass = sc;
+    rollNum = rno;
+    marks = m;
+  }
+  void Grading(){
+    if(marks>=90){
+      cout<<"Grade: O"<<endl;
+    }
+    else if(marks>=75 && marks<90){
+      cout<<"Grade: A+";
+    }
+    else if(marks>=65 && marks<75){
+      cout<<"Grade: A"<<endl;
+    }
+    else if(marks>=55 && marks<65){
+      cout<<"Grade: B+"<<endl;
+    }
+    else if(marks>=50 && marks<55){
+      cout<<"Grade: B"<<endl;
+    }
+    else if(marks>=45 && marks<50){
+      cout<<"Grade: C"<<endl;
+    }
+    else if(marks>=40 && marks<45){
+      cout<<"Grade: P"<<endl;
+    }
+    else{
+      cout<<"Grade: F"<<endl;
+    }
+  }
+  void displayInfo(){
+    cout<<"Name: "<<name<<endl;
+    cout<<"Class: "<<studclass<<endl;
+    cout<<"Roll Num: "<<rollNum<<endl;
+    cout<<"Marks: "<<marks<<endl;
+    Grading();
+  }
+};
+
+int main(){
+  
 }
