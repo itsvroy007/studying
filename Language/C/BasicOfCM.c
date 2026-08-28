@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-// thrgh loops
+
 int fibo(int terms){
   int a = 0;
   int b = 1;
@@ -92,13 +92,6 @@ int main(){
 formula -> x(i+1) = x(i) - f(x(i)) / f'(x(i))
 y = f(x)
 f( x) and f'(x)
-initial guess -> x
-
-let fx is x ^3 - 2x -5 =0
-
-function -> (x*x*x)-2*(x) - 5 = 0;
-df -> 3*(x*x) - 2
-
 initial guess -> num
 */
 
@@ -144,7 +137,6 @@ void NewtonRaphsonMethod(){
 }
 
 int main(){
-  fibonacci(10, 0, 1);
-  goldenRatio();
+  
   return 0;
 }

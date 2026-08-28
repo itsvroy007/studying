@@ -164,7 +164,7 @@ int main(){
                 printf("\nyes , %d and %d have same dept",arr4[i].rollnum,arr4[i+1].rollnum);
             }
         }
-    return;
+        return;
     }
     is_same_dept(arr4[10]);
     return 0;

@@ -153,7 +153,7 @@ void insertAtEnd(struct node **head, int value){
 }
 
 void insertAtPosition(struct node **head, int value, int position){
-  /* Position 0 means insert at start */
+  // Position 0 means insert at start 
   if (position == 0){
     insertAtStart(head, value);
     return;
@@ -165,11 +165,7 @@ void insertAtPosition(struct node **head, int value, int position){
   }
   
   struct node *temp = *head;
-  
-  /*
-    Move to the node BEFORE
-    the position where we want to insert.
-  */
+  //  Move to the node BEFORE the position where we want to insert.
   for (int i = 0; i < position - 1 && temp != NULL; i++){
     temp = temp->next;
   }
@@ -188,7 +184,6 @@ void insertAtPosition(struct node **head, int value, int position){
   }
   
   newNode->data = value;
-  
   newNode->next = temp->next;
   temp->next = newNode;
 }
