@@ -210,6 +210,6 @@ int main(){
       else cout<<"Wrong Input"<<endl;
     }
     while (choice != 6);
-
+    cout<<"Enter data"<<endl;
     return 0;
 }
