@@ -114,7 +114,7 @@ public:
     cout << "Display of matrix:\n";
     for (int i = 0; i < rows; i++){
       for (int j = 0; j < cols; j++){
-        cout << mat[i][j];
+        cout << mat[i][j]<<" ";
       }
       cout << endl;
     }
@@ -122,9 +122,9 @@ public:
 
   Matrix Multiply(Matrix B){
     Matrix result;
-    result.rows = rows;
-    result.cols = B.cols;
-    if (rows == B.cols){
+    if (cols == B.rows){
+      result.rows = rows;
+      result.cols = B.cols;
       for (int i = 0; i < rows; i++){
         for (int j = 0; j < B.cols; j++){
           result.mat[i][j] = 0;
@@ -134,29 +134,38 @@ public:
         }
       }
     }
+    else{
+      cout<<"Matrix Multiplication Not Possible as Num of cols of Matrix A not equal to Num of rows of Matrix B."<<endl;
+      // need a code line to stop storing garbage value in result matrix
+      result.rows = rows;
+      result.cols = B.cols;
+      for (int i = 0; i < rows; i++){
+        for (int j = 0; j < B.cols; j++){
+          result.mat[i][j] = 0;
+        }
+      }
+    }
     return result;
   }
 };
 
 int main(){
   Matrix A;
-  cout << "Enter mat A :" << endl;
+  cout << "Matrix A :" << endl;
   A.input();
   cout << "display of mat A: " << endl;
   A.display();
   Matrix B;
-  cout << "Enter mat B :" << endl;
+  cout << "Matrix B :" << endl;
   B.input();
   cout << "display of mat B: " << endl;
   B.display();
-  cout << "Result matrix: " << endl;
+  cout << "Result Matrix: " << endl;
   Matrix result = A.Multiply(B);
   result.display();
   return 0;
 }
-
 */
-
 
 // lab prog 3 to perform addition of two complex numbers using constructor overloading.
 /*
@@ -200,4 +209,5 @@ int main(){
   return 0;
 }
 */
+
 
