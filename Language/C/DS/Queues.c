@@ -178,6 +178,47 @@ void display(){
   return;
 }
 
+
+// circular 
+
+void CircularEnqueue(int value){
+    if ((rear + 1) % SIZE == front){
+        printf("Circular Queue is Full\n");
+        return;
+    }
+
+    if (front == -1){
+        front = rear = 0;
+    }
+    else{
+        rear = (rear + 1) % SIZE;
+    }
+
+    queue[rear] = value;
+}
+
+void CircularDequeue(){
+    int value;
+
+    if (front == -1){
+        printf("Circular Queue is Empty\n");
+        return;
+    }
+
+    value = queue[front];
+
+    if (front == rear){
+        front = rear = -1;
+    }
+    else{
+        front = (front + 1) % SIZE;
+    }
+
+    printf("Deleted element = %d\n", value);
+}
+
+
+
 int main(){
   enqueue(10);
   enqueue(20);
