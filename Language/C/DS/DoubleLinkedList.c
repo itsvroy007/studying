@@ -28,11 +28,12 @@ void SLL(){
 
 struct node{
   struct node *prev;
-  int data;
+  int empId;
+  float salary;
   struct node *next;
 };
 
-
+/*
 void DLL(){
   struct node *head, *second, *third;
   head = (struct node *)malloc(sizeof(struct node));
@@ -90,7 +91,69 @@ void insertAtstart(){
   return ;
 }
 
+*/
+
+void transverse(struct node *head){
+  struct node *temp = head;
+  while (temp != NULL){
+    printf("%d & %.2f -> ", temp->empId,temp->salary);
+    temp = temp->next;
+  }
+  printf("NULL\n");
+}
+
+void insertAtStart(struct node *head, int id , float sal){
+  struct node *newNode = malloc(sizeof(struct node));
+  if (newNode == NULL){
+    printf("Memory allocation failed\n");
+    return;
+  }
+  newNode->empId = id;
+  newNode->salary = sal;
+  newNode->next = head;
+  head->prev = newNode;
+}
+
 int main(){
-  insertAtstart();
+  struct node *head, *second, *third;
+  head = (struct node *)malloc(sizeof(struct node));
+  second = (struct node *)malloc(sizeof(struct node));
+  third = (struct node *)malloc(sizeof(struct node));
+  if (head == NULL || second == NULL || third == NULL){
+    printf("mem not allocated");
+  }
+  else{
+    head->empId = 101;
+    head->salary = 10000;
+    head->next = second;
+    second->prev = head;
+    second->empId = 102;
+    second->salary = 20000;
+    second->next = third;
+    third->prev = second;
+    third->empId = 103;
+    third->salary = 30000;
+    third->next = NULL;
+  }
+  transverse(head);
+
+  struct node *newNode = malloc(sizeof(struct node));
+  if (newNode == NULL){
+    printf("Memory allocation failed\n");
+  }
+  newNode->empId = 100;
+  newNode->salary = 5000;
+  newNode->next = head;
+  head->prev = newNode;
+
+  transverse(newNode);
+
+  struct node *temp = newNode;
+  while (temp->next->next != NULL){
+    temp = temp->next;
+  }
+  free(temp->next);
+  temp->next = NULL;
+  tranverse(newNode);
   return 0;
 }
