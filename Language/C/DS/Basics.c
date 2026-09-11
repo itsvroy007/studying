@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<string.h>
 
+// lab work of ds
+
 void LinearSearch(){
   int size;
   printf("enter the size of arr: ");
@@ -220,9 +222,20 @@ int main(){
 }
 */
 
+/*
+4.⁠ ⁠Create doubly linked list with nodes having information about an employee and perform Insertion at front of doubly linked list and perform deletion at end of that doubly linked list.
 
+5.Create circular linked list having information about a college and perform Insertion at front perform Deletion at end.
+
+6.Implement two stacks in a using single array.
+
+7.⁠ ⁠Create a stack and perform Push, Pop, Peek and Traverse operations on the stack using Linked list.
+
+8.⁠ ⁠Create a Linear Queue using Linked List and implement different operations such as Insert, Delete, and Display the queue elements.
+
+*/
 
 int main(){
-  char temp[10]="Hello";
-  printf("%s",temp);
+  
+  return 0;
 }
