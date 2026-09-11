@@ -1,8 +1,9 @@
 #include <iostream>
-#include <string.h>
+#include <cstring>
+#include <cctype>
 using namespace std;
 
-/* lab prog 1 Cab booking using functions 
+// lab prog 1 Cab booking using functions 
 
 string CustName;
 string PickUpLoc;
@@ -75,7 +76,7 @@ void displayInfo(){
     cout<<"cab type: "<<carType<<endl;
     cout<<"Total Fare: Rs. "<<fare<<endl;
 }
-
+/*
 int main(){
   EnterDetails();
   CarBooking();
@@ -87,9 +88,9 @@ int main(){
   else cout<<"Booking Not Confirmed"<<endl;
   return 0;
 }
-  */
+*/
 
-/* lab pro 2 Matrix Multiplication
+// lab pro 2 Matrix Multiplication
 class Matrix{
 private:
   int mat[10][10];
@@ -148,7 +149,7 @@ public:
     return result;
   }
 };
-
+/*
 int main(){
   Matrix A;
   cout << "Matrix A :" << endl;
@@ -168,7 +169,7 @@ int main(){
 */
 
 // lab prog 3 to perform addition of two complex numbers using constructor overloading.
-/*
+
 class ComplexNum{
 private:
   double real;
@@ -199,6 +200,7 @@ public:
   }
 };
 
+/*
 int main(){
   ComplexNum c1(5.5);
   c1.display();
@@ -210,4 +212,87 @@ int main(){
 }
 */
 
+/*lab prog 4 
+a. Overload + operator to carry out the concatenation of strings.
+b. Overload = operator to carry out string copy.
+c. Overload <= operator to carry out the comparison of strings.
+d. Function to display the length of a string.
+e. Function tolower( ) to convert upper case letters to lower case.
+f. Function toupper( ) to convert lower case letters to upper case
+*/
 
+class String{
+private:
+  char str[100];
+public:
+  String(){
+    str[0] = '\0';
+  }
+  String(const char s[]){
+    strcpy(str,s);
+  }
+
+  String operator+(const String& s){// concatenate str 
+    String temp;
+    strcpy(temp.str,str);
+    strcat(temp.str,s.str);
+    return temp;
+  }
+  
+  String operator=(const String& s){
+    String temp;
+    strcpy(temp.str,s.str);
+    return temp;
+  }
+
+  bool operator<=(const String& s){
+    return strcmp(str,s.str)<= 0;
+  }
+
+  void StrLen(){
+    cout<<"The length of the string is: "<<strlen(str)<<endl;
+  }
+
+  void display(){
+    cout<<"The string is: "<<str<<endl;
+  }
+
+  void lower(){
+    for(int i=0;str[i] !='\0';i++){
+      str[i] = tolower(str[i]);
+    }
+  }
+
+  void upper(){
+    for(int i=0;str[i] !='\0';i++){
+      str[i] = toupper(str[i]);
+    }
+  }
+};
+
+int main(){
+  String s1("Hello");
+  String s2("World");
+  String s3;
+  s3 = s1+s2;
+  s3.display();
+  s3.StrLen();
+}
+
+// WAP to define the function template for calculating the square of given numbers with different data types.
+
+template <class Sq>
+Sq square(Sq num){
+  return num * num;
+}
+
+int main(){
+  int a = 5;
+  float b = 5.5;
+  double c = 6.25;
+
+  cout << "Square of int: " << square(a) << endl;
+  cout << "Square of float: " << square(b) << endl;
+  cout << "Square of double: " << square(c) << endl;
+  return 0;
+}
