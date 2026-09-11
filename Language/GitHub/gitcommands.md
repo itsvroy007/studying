@@ -24,6 +24,9 @@ git push origin -u
 # to remove file or multiple file before pushing commit changes
 git rm -r --cached <filename> 
 
+# to remove file from local device + git 
+git rm <filename>
+
 # to remove the uploaded folder
 moved to root folder
 git rm <dirname>
