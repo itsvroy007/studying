@@ -84,8 +84,6 @@ int peek(){
   return stack[top];
 }
 
-
-
 */
 
 #define SIZE 5
@@ -196,7 +194,66 @@ void MenuDrivenProgram(){
   return;
 }
 
+// Implement two stacks in a using single array.
+#define size  10
+int stack1[size];
+int top1 = -1;
+int top2 = size-1;
+
+void push1(int value){//stack1
+  if(top1+1 == top2){
+    printf("Stack1 is overflow");
+    return;
+  }
+  stack1[++top1] = value;
+  return;
+}
+
+void push2(int value){//stack2
+  if(top1+1 == top2){
+    printf("Stack2 is overflow");
+    return;
+  }
+  stack1[top2--] = value;
+  return;
+}
+
+void pop1(){
+  if(top1 == -1){
+    printf("\nStack1 is empty");
+    return;
+  }
+  printf("\nDeleted elem from stack1 was: %d ",stack1[top1--]);
+  return;
+}
+
+void pop2(){
+  if(top2 == size-1){
+    printf("\nStack2 is empty");
+    return;
+  }
+  printf("\nDeleted elem from stack2 was: %d ",stack1[++top2]);
+  return;
+}
+
+void display1(){
+  printf("\nElem of stack1 arr: ");
+  for(int i=top1;i>=0;i--){
+    printf(" %d ",stack1[i]);
+  }
+  return ;
+}
+
+void display2(){
+  printf("\nElem of stack2 arr: ");
+  for(int i=top2+1;i<size;i++){
+    printf(" %d ",stack1[i]);
+  }
+  return ;
+}
+
 int main(){
+  /*
   push(10);
   push(20);
   push(30);
@@ -210,6 +267,27 @@ int main(){
   display();
 
   printf("Top element: %d\n", peek());
+  */
+
+  push1(10);
+  push1(20);
+  push1(30);
+
+  push2(500);
+  push2(600);
+  push2(700);
+
+  display1();
+
+  display2();
+
+  pop2();
+  
+  pop1();
+
+  display1();
+
+  display2();
 
   return 0;
 }
