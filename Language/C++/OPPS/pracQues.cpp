@@ -47,6 +47,52 @@ public:
   }
 };
 
+// complex num 
+
+class ComplexNum{
+private:
+  double real;
+  double imag;
+public:
+  ComplexNum(){
+    real = imag = 0;
+  }
+  ComplexNum(double num){
+    real = imag = num;
+  }
+  ComplexNum(double real,double imag){
+    this->real = real;
+    this->imag = imag;
+  }
+
+  ComplexNum add(ComplexNum C){
+    ComplexNum result;
+    result.real = real + C.real;
+    result.imag = imag + C.imag;
+    return result;
+  }
+  void display(){
+    cout<<"Real part is: "<<real<<endl;
+    cout<<"Imag part is: "<<imag<<endl;
+    cout<<"Complex num is: "<<real<<" + "<<imag<<"i"<<endl;
+    return ;
+  }
+};
+
+/*
+int main(){
+  ComplexNum c1(5.5);
+  c1.display();
+  ComplexNum c2(5.6,9.7);
+  c2.display();
+  ComplexNum c3 = c1.add(c2);
+  c3.display();
+  return 0;
+}
+*/
+
+
+
 int main(){
   /*
   Time t1(10,24);
